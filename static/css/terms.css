@@ -1,0 +1,13 @@
+#contentTerms > p {
+    display: inline-block;
+    padding-left: 15px;
+    text-align: justify;
+    font-size: 1.05rem;
+}
+#contentTerms > h1 {
+    font-size: 2.5rem;
+}
+#contentTerms > h5 {
+    font-size: 1.3rem;
+    font-weight: bolder;
+}

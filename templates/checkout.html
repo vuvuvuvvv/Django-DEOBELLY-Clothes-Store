@@ -1,0 +1,79 @@
+{% extends 'layouts/layout.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}Thanh toán
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block staticlink %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+<form method="post" id="billing-form">
+    {% csrf_token %}
+    <div class="w-100 row mx-0 px-1 pt-3 pt-md-5 pt-lg-5 px-sm-0 d-flex">
+        <div class="col-12 col-lg-6 order-1 order-lg-0 mx-0 d-flex p-0 mt-4 mt-lg-0">
+            <div class="w-100 m-0 p-0">
+                <h3 class="w-100 pb-1 border-bottom px-0">Thông tin đơn hàng:</h3>
+                <div class="w-100 row py-3 px-1 m-0" id="consignee-contact">
+                    {% include 'includes/form.html' %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-6 order-0 order-lg-1 p-0 ps-lg-4 ps-xl-5 m-0 my-4 my-lg-0">
+            <h3 class="pb-1 border-bottom px-0">Giỏ hàng:</h3>
+            <div class="w-100 m-0 p-0">
+                {% for item in cart %}
+                <div class="w-100 row m-0 pb-2 p-0 d-flex align-items-center border-bottom row-product">
+                    <div class="col-8 col-sm-6 col-md-7 col-lg-8 row m-0 p-0">
+                        <div class="col-4 col-md-2 position-relative p-0">
+                            <img src="{% static 'images' %}/{{ item.product.image }}" loading='lazy'
+                                class="w-100 position-relative">
+                            <span class="product-quantity" data-quantity="{{ item.quantity }}">{{ item.quantity }}</span>
+                        </div>
+                        <div class="col-8 col-md-10 ps-3 d-flex align-items-center">
+                            <div class="w-100">
+                                <p class="m-0 product-name">{{ item.product.name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 col-sm-6 col-md-5 col-lg-4 row m-0 py-0 px-2">
+                        <p class="m-0 px-1 text-end price" id="total_price_{{ item.product.id|encrypt_string }}"
+                            data-total-price="{{ item.total_price }}">{{ item.total_price|format_number }} VND</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="w-100 row m-0 p-0 bg-lighter-gray border-top mt-3">
+        <div class="col-12 col-md-6 m-0 p-0">
+        </div>
+        <div class="col-12 col-md-6 m-0 p-2">
+            <div class="my-1 py-2 w-100">Tổng thanh toán: <span class="fs-4 text-danger m-0 float-end" id="total_payment"></span></div>
+        </div>
+        <div class="w-100 row m-0 py-3 px-0 px-sm-auto border-top d-flex align-items-center">
+            <div class="col-7 col-sm-8 fs-xsm__12px">
+                Nhấn Đặt hàng đồng nghĩa bạn đồng ý với <a href="{% url 'terms' %}" class="text-decoration-none text-primary">điều khoản và chính sách của DEOBELLY.</a>
+            </div>
+            <div class="col-5 col-sm-4 px-2">
+                <button type="submit" class="btn bg-red rounded-0 px-3 px-sm-4 py-2 text-white float-end" id="order">Đặt hàng</button>
+            </div>
+        </div>
+    </div>
+    
+
+</form>
+
+{% endblock%}
+
+{% block scripts %}
+<script src="{% static 'js/checkout.js' %}" defer></script>
+{% endblock %}

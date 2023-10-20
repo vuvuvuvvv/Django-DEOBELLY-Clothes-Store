@@ -1,0 +1,61 @@
+{% load widget_tweaks %}
+
+{% if form.non_field_errors %}
+<div class="alert alert-danger" style="--bs-alert-border-color: rgb(134, 0, 0) !important;--bs-alert-bg: #f0bbc071;backdrop-filter: blur(10px) !important;" role="alert">
+  {% for error in form.non_field_errors %}
+    <p{% if forloop.last %} class="mb-0"{% endif %}>{{ error }}</p>
+  {% endfor %}
+</div>
+{% endif %}
+
+<div class="w-100 m-0 p-0 row">
+    {% for field in form %}
+        {% if field.name == 'specific_address' %}
+        <div class="form-group mb-1 col-12">
+            <label for="provinceDataList" class="form-label">Tỉnh/Thành phố</label>
+            <select class="form-select" aria-label="Default select example" name="provinve" id="provinceDataList" required>
+            </select>
+        </div>
+
+        <div class="form-group mb-1 col-12">
+            <label for="districtDataList" class="form-label">Quận / Huyện</label>
+            <select class="form-select" aria-label="Default select example" name="district" id="districtDataList" disabled required>
+            </select>
+        </div>
+
+        <div class="form-group mb-1 col-12">
+            <label for="wardsDataList" class="form-label">Xã/Phường/Thị trấn</label>
+            <select class="form-select" aria-label="Default select example" name="wards" id="wardsDataList" disabled required>
+            </select>
+        </div>
+    {% endif %}
+    <div class="form-group mb-1 {% if field.name == 'first_name' or field.name == 'last_name' %}col-12 col-sm-6{% endif %} {% if field.name == 'email' and not request.resolver_match.url_name == 'password_reset'  %}col-12 col-sm-7{% endif %} {% if field.name == 'tel' and not request.resolver_match.url_name == 'validate_infor_user' and not request.resolver_match.url_name == 'checkout' %}col-12 col-sm-5{% endif %}">
+        {{ field.label_tag }}
+
+        {% if form.is_bound %}
+            {% if field.errors %}
+                {% render_field field class="form-control p-2 mb-1 is-invalid" %}
+                {% for error in field.errors %}
+                <div class="invalid-feedback">
+                    {{ error }}
+                </div>
+                {% endfor %}
+            {% else %}
+                {% if form.non_field_errors %}
+                    {% render_field field class="form-control p-2 mb-1 is-invalid" %}
+                {% else %}
+                    {% render_field field class="form-control p-2 mb-1 is-valid" %}
+                {% endif %}
+            {% endif %}
+        {% else %}
+            {% render_field field class="form-control p-2 mb-1" %}
+        {% endif %}
+
+        {% if field.help_text %}
+        <small class="form-text text-muted p-0 m-0">
+            {{ field.help_text }}
+        </small>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>

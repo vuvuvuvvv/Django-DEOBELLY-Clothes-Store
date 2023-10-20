@@ -1,0 +1,194 @@
+{% extends 'layouts/layout.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}
+DE OBELLY - Điều khoản & Dịch vụ
+{% endblock %}
+
+{% block css %}
+<style>
+    @media (max-width: 992px) {
+        .w-search {
+            width: 100% !important;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .w-search {
+            width: 60% !important;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block staticlink %}
+<link rel="stylesheet" href="{% static 'css/product.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="visually-hidden" id="sth" data-id="{% if user.is_authenticated %}0{% else %}1{% endif %}"></div>
+<div class="row p-0 pt-md-5 d-none" id="notify-search">
+    <!-- todo -->
+    <div class="w-100 align-items-center justify-content-center d-flex">
+        <span class="fs-5 text-center">
+            Kết quả tìm kiếm cho: <i id="content-search"></i> <button
+                class="p-0 text-dark fs-6 m-0 btn bg-transparent" id="remove-keyword"><i
+                    class="fas fa-times-circle"></i></button>
+        </span>
+    </div>
+</div>
+<div class="row m-0 p-0 pt-4 w-100">
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasCategory"
+        aria-labelledby="offcanvasCategoryLabel">
+        <div class="offcanvas-header border-bottom border-dark">
+            <h5 class="offcanvas-title text-uppercase" id="offcanvasCategoryLabel">Type</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+                id="sm-offcanvas-close"></button>
+        </div>
+        <div class="offcanvas-body p-0">
+            <div class="accordion accordion-flush ct-show" id="type_category_offcanvas">
+                {% for type in product_types %}
+                {% with id_encrypted=type.id|encrypt_string %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="offcanvas-flush-heading-{{ id_encrypted }}">
+                        <button class="accordion-button collapsed text-uppercase fw-light btn-title-category"
+                            type="button" data-bs-toggle="collapse" data-type="{{ id_encrypted }}"
+                            data-type-name="{{ type.name }}"
+                            data-bs-target="#offcanvas-flush-collapse-{{ id_encrypted }}" aria-expanded="false"
+                            aria-controls="offcanvas-flush-collapse-{{ id_encrypted }}">
+                            {{ type.name }}
+                        </button>
+                    </h2>
+                    <div id="offcanvas-flush-collapse-{{ id_encrypted }}"
+                        class="accordion-collapse collapse ps-4 ps-md-5 py-3"
+                        aria-labelledby="offcanvas-flush-heading-{{ id_encrypted }}"
+                        data-bs-parent="#type_category_offcanvas">
+                        {% for cate in type.categories.all %}
+                        <label class="category-checkbox">{{ cate.name }}
+                            <input type="checkbox" value="{{ cate.id }}">
+                            <span class="checkmark"></span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endwith %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="w-100 d-md-none m-0 p-0 text-center position-relative h-tool border-dark border-bottom">
+        <button
+            class="btn bg-transparent border-0 rounded-0 float-start text-uppercase p-0 py-auto m-0 fs-6 fw-bold btn-offcanvas"
+            type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCategory"
+            aria-controls="offcanvasCategory">
+            Type <i class="fas fa-caret-down"></i>
+        </button>
+        <!-- todo -->
+        {% if paramCate %}
+        <span class="fw-bold text-uppercase fs-6" id="offcanvas-category-name">{{ paramCate.type_name }}</span>
+        {% else %}
+        <span class="fw-bold text-uppercase fs-6" id="offcanvas-category-name" data-value="Product">Product</span>
+        {% endif %}
+        <div class="dropdown float-end offcanvas-dropdown">
+            <button class="btn bg-transparent border-0 rounded-0 p-0 dropdown-toggle fs-6 fw-bold" type="button"
+                id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-sliders-h"></i> Filter
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li>
+                    <button class="dropdown-item btn border-0 rounded-0 sortByDate">NEWEST</button>
+                </li>
+                <li>
+                    <button class="dropdown-item btn border-0 rounded-0 highToLow">PRICE (HIGH-LOW)</button>
+                </li>
+                <li>
+                    <button class="dropdown-item btn border-0 rounded-0 lowToHigh">PRICE (LOW-HIGH)</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-3 col-xl-2 m-0 p-0 d-md-block d-none">
+        <div class="w-100 px-3 py-2 m-0 border-bottom border-dark">
+            <span class="fw-bold fs-5 p-0 text-uppercase">Type</span>
+        </div>
+        <div class="accordion accordion-flush w-100 pb-5" id="type_category">
+            {% for type in product_types %}
+            {% with id_encrypted=type.id|encrypt_string %}
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-heading-{{ id_encrypted }}">
+                    <button class="accordion-button collapsed text-uppercase fw-light btn-title-category" type="button"
+                        data-bs-toggle="collapse" data-type="{{ id_encrypted }}" data-type-name="{{ type.name }}"
+                        data-bs-target="#flush-collapse-{{ id_encrypted }}" aria-expanded="false"
+                        aria-controls="flush-collapse-{{ id_encrypted }}">
+                        {{ type.name }}
+                    </button>
+                </h2>
+                <div id="flush-collapse-{{ id_encrypted }}" class="accordion-collapse collapse ps-4 ps-md-5"
+                    aria-labelledby="flush-heading-{{ id_encrypted }}" data-bs-parent="#type_category">
+                    {% for cate in type.categories.all %}
+                    <label class="category-checkbox mt-2">{{ cate.name }}
+                        <input type="checkbox" type="{{ cate.id }}">
+                        <span class="checkmark"></span>
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endwith %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="col-12 col-md-9 col-xl-10 m-0 p-0">
+        <div class="px-3 w-100 d-md-block d-none" style="height:47px">
+            <div class="w-100 py-2 border-bottom border-dark mb-2">
+                {% if paramCate %}
+                <span class="fw-bold text-uppercase fs-5" id="category-name">{{ paramCate.type_name }}</span>
+                {% else %}
+                <span class="fw-bold text-uppercase fs-5" id="category-name" data-value="Product">Product</span>
+                {% endif %}
+                <div class="dropdown float-end">
+                    <button class="btn bg-transparent border-0 rounded-0 p-0 dropdown-toggle" type="button"
+                        id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-sliders-h"></i> Filter
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li>
+                            <button class="dropdown-item btn border-0 rounded-0 sortByDate">NEWEST</button>
+                        </li>
+                        <li>
+                            <button class="dropdown-item btn border-0 rounded-0 highToLow">PRICE (HIGH-LOW)</button>
+                        </li>
+                        <li>
+                            <button class="dropdown-item btn border-0 rounded-0 lowToHigh">PRICE (LOW-HIGH)</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <input type='hidden' id='current_page' class="w-100">
+        <div id="result" class="w-100 row m-0 p-0 my-3 px-3">
+
+
+        </div>
+        <!-- todo -->
+        <!-- <div class="mt-2 text-center w-100" id="pagination">
+            <input type='hidden' id='current_page'>
+            <div id='page_navigation' class="text-end"></div>
+        </div> -->
+    </div>
+</div>
+<div id="toastBoard" class="position-fixed bg-success rounded">
+    <div id="liveToast" class="toast py-3 px-2 text-light bg-success border-2 fw-bold" role="alert"
+        aria-live="assertive" aria-atomic="true">
+        <span id="toastNotify"></span>
+    </div>
+</div>
+
+{% endblock%}
+
+{% block scripts %}
+<script src="{% static 'js/product.js' %}" defer></script>
+{% endblock %}

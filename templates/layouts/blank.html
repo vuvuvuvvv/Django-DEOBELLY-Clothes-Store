@@ -1,0 +1,125 @@
+{% load static %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <!-- Setup bootstrap 5 -->
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-5.3.1.min.css' %}">
+    <script src="{% static 'js/bootstrap-5.3.1.min.js' %}"></script>
+    <script src="{% static 'js/font-awesome/all.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/sweetalert.min.js' %}"></script>
+    <style>
+        body,
+        html {
+            width: 100%;
+            height: 100vh !important;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <!-- Title -->
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    <script>
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getCookie('csrftoken')
+    </script>
+    <!-- Internal css -->
+    {% block css %}
+    {% endblock %}
+    <!-- Custom link: css, js,... -->
+    {% block staticlink %}
+    {% endblock %}
+
+
+</head>
+
+<body>
+    <div class="sky">
+        <div class="cloud-container">
+            <div class="cloud"></div>
+            <div class="cloud"></div>
+            <div class="cloud"></div>
+            <div class="cloud"></div>
+            <div class="cloud"></div>
+            <div class="cloud"></div>
+            <div class="cloud"></div>
+            <div class="cloud"></div>
+        </div>
+    </div>
+    <div id="loader">
+        <div class="box-loader d-flex align-items-center justify-content-center">
+            <div class="loader loader--style5" title="4">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="48px" height="60px"
+                    viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                    <rect x="0" y="0" width="4" height="10" fill="#333">
+                        <animateTransform attributeType="xml" attributeName="transform" type="translate"
+                            values="0 0; 0 20; 0 0" begin="0" dur="0.6s" repeatCount="indefinite" />
+                    </rect>
+                    <rect x="10" y="0" width="4" height="10" fill="#333">
+                        <animateTransform attributeType="xml" attributeName="transform" type="translate"
+                            values="0 0; 0 20; 0 0" begin="0.2s" dur="0.6s" repeatCount="indefinite" />
+                    </rect>
+                    <rect x="20" y="0" width="4" height="10" fill="#333">
+                        <animateTransform attributeType="xml" attributeName="transform" type="translate"
+                            values="0 0; 0 20; 0 0" begin="0.4s" dur="0.6s" repeatCount="indefinite" />
+                    </rect>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <div id="wrapper">
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</body>
+<script>
+    function loader() {
+        $('html').scrollTop(0);
+        $('#loader').show();
+        setTimeout(() => {
+            $('#loader').hide();
+        }, 500);
+    }
+    $(document).ready(() => {
+        $.ajaxSetup({
+            beforeSend: (xhr) => {
+                $('#loader').show();
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            },
+            complete: () => {
+                $('#loader').hide();
+            }
+        });
+        loader()
+    });
+</script>
+</html>

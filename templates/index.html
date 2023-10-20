@@ -1,0 +1,188 @@
+{% extends 'layouts/layout.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}
+DE OBELLY
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+{% block staticlink %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+
+
+{% block content %}
+<!-- Carousel wrapper -->
+<div class="full-width">
+    <div id="sliderHeader" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselBasicExample" data-bs-slide-to="0"
+                class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselBasicExample" data-bs-slide-to="1"
+                class="" aria-current="true" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselBasicExample" data-bs-slide-to="2"
+                class="" aria-current="true" aria-label="Slide 3"></button>
+        </div>
+        <!-- Inner -->
+        <div class="carousel-inner">
+            <!-- Single item -->
+            <div class="carousel-item active">
+                <img src="{% static 'images/slider/20211211162638-min.jpg' %}" class="d-block w-100" alt="..." />
+                <div class="carousel-caption d-none d-md-block">
+                    <!-- <h5></h5>
+                    <p></p> -->
+                </div>
+            </div>
+            <div class="carousel-item ">
+                <img src="{% static 'images/slider/20211211163001-min.jpg' %}" class="d-block w-100" alt="..." />
+                <div class="carousel-caption d-none d-md-block">
+                    <!-- <h5></h5>
+                    <p></p> -->
+                </div>
+            </div>
+            <div class="carousel-item ">
+                <img src="{% static 'images/slider/20211211162936-min.jpg' %}" class="d-block w-100" alt="..." />
+                <div class="carousel-caption d-none d-md-block">
+                    <!-- <h5></h5>
+                    <p></p> -->
+                </div>
+            </div>
+        </div>
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#sliderHeader" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#sliderHeader" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+<!-- Carousel wrapper -->
+<h1 class="text-uppercase fw-light text-center my-5">New Arrival</h1>
+<div class="row w-100 mx-0">
+    <div class="col-12 row mb-md-4 mx-0 p-0">
+        <div class="col-md-5 px-md-3 px-lg-4 d-none d-md-block">
+            <img loading='lazy' src="{% static 'images/site-index/new-arrivals-1-min.jpg' %}" class="object-fit-cover shadow"
+                alt="{{ arrNewProductImage.0.title }}">
+        </div>
+        <div class="col-12 col-md-7 px-md-3 px-lg-4">
+            <img loading='lazy' src="{% static 'images/site-index/new-arrivals-2-min.jpg' %}" class="object-fit-cover shadow"
+                alt="{{ arrNewProductImage.1.title }}">
+        </div>
+    </div>
+    <div class="col-12 row mt-3 mt-md-4 mx-0 p-0">
+        <div class="col-12 col-md-7 px-md-3 px-lg-4">
+            <img loading='lazy' src="{% static 'images/site-index/new-arrivals-3-min.jpg' %}" class="object-fit-cover shadow"
+                alt="{{ arrNewProductImage.2.title }}">
+        </div>
+        <div class="col-12 col-md-5 mt-3 mt-md-0 px-md-3 px-lg-4">
+            <img loading='lazy' src="{% static 'images/site-index/new-arrivals-4-min.jpg' %}" class="object-fit-cover shadow"
+                alt="{{ arrNewProductImage.3.title }}">
+        </div>
+    </div>
+
+    <div class="col-12 text-center mb-5 mt-4 my-md-5">
+        <a href="{% url 'shop' %}" class="btn btn-dark rounded-0 fs-4 fw-light px-4 px-lg-5">
+            See more
+        </a>
+    </div>
+</div>
+<div class="row px-3 px-md-4 w-100 m-0 sereno">
+    <div class="col-12 col-md-6 ps-lg-5 px-0 px-md-4">
+        <img loading='lazy' src="{% static 'images/site-index/de-obelly-collection-min.jpg' %}" class="object-fit-cover shadow p-0 d-none d-md-block"
+            alt="...">
+    </div>
+    <div class="col-12 col-md-6 d-flex align-items-center px-0 px-md-4 pe-lg-5 mt-3 mt-md-0">
+        <div class="w-100 text-justify">
+            <h1 class="fw-light m-0 text-uppercase text-center text-md-start">
+                DE-O COLLECTIONS</h1>
+            <p class="fs-5 fw-light my-3 my-md-4 my-xl-5 px-0">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Integer interdum porttitor sagittis. 
+                Suspendisse malesuada lacus sit amet nulla vehicula, vel tincidunt nulla viverra. 
+                Aliquam dapibus felis sit amet dui tincidunt vulputate. 
+                Pellentesque eu quam facilisis velit ullamcorper tincidunt id a nisl. 
+                Phasellus ornare tempus volutpat. 
+                Maecenas consequat, arcu vitae tempor dapibus, turpis metus porttitor arcu, non laoreet neque massa ut sapien. 
+                Etiam sodales egestas sem, quis hendrerit massa laoreet nec. 
+                Mauris a enim eu lorem porta blandit. 
+                Donec vehicula, dolor tempus convallis dictum, 
+                risus ex lacinia urna, eget pretium lectus dolor vitae sapien. 
+            </p>
+            <div class="w-100 text-center">
+                <a href="{% url 'shop' %}" class="btn btn-dark rounded-0 fs-6 fw-light px-4">See
+                    more</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h1 class="text-uppercase fw-light text-center mt-5 mb-3 my-5">pronto</h1>
+<div class="row px-3 px-md-4 my-3 my-md-5 w-100 mx-0">
+    <p class="fs-5 fw-light text-justify w-100 px-0">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Integer interdum porttitor sagittis.
+        Suspendisse malesuada lacus sit amet nulla vehicula,
+        vel tincidunt nulla viverra.
+        Aliquam dapibus felis sit amet dui tincidunt vulputate.
+        Pellentesque eu quam facilisis velit ullamcorper tincidunt id a nisl.
+        Phasellus ornare tempus volutpat.
+        Maecenas consequat, arcu vitae tempor dapibus,
+        turpis metus porttitor arcu, non laoreet neque massa ut sapien.
+        Etiam sodales egestas sem, quis hendrerit massa laoreet nec.
+        Mauris a enim eu lorem porta blandit.
+        Donec vehicula, dolor tempus convallis dictum, risus ex lacinia urna,
+        eget pretium lectus dolor vitae sapien. Curabitur ultricies finibus commodo.
+    </p>
+</div>
+
+<div class="row px-md-5 my-3 my-md-5 px-3 w-100 mx-0">
+    <div class="col-6 px-2 ps-md-5 pe-md-3">
+
+        <img loading='lazy' src="{% static 'images/site-index/pronto-image-1-min.jpg' %}" class="mb-md-4 w-100 shadow pronto-img-left" alt="banner_img">
+
+        <img loading='lazy' src="{% static 'images/site-index/pronto-image-2-min.jpg' %}" class="w-100 mt-4 h-50 shadow d-none d-md-block" alt="banner_img">
+
+    </div>
+    <div class="col-6 px-2 ps-md-3 pe-md-5">
+        <img loading='lazy' src="{% static 'images/site-index/pronto-image-3-min.jpg' %}" class="w-100 h-25 shadow d-none d-md-block" alt="banner_img">
+
+        <img loading='lazy' src="{% static 'images/site-index/pronto-image-4-min.jpg' %}" class="my-md-4 w-100 shadow pronto-img-left" alt="banner_img">
+
+        <img loading='lazy' src="{% static 'images/site-index/pronto-image-5-min.jpg' %}" class="w-100 h-25 shadow d-none d-md-block" alt="banner_img">
+
+    </div>
+</div>
+
+<div class="row w-100 m-0 p-0">
+    <div class="col-12 text-center pt-3 pt-md-5">
+        <a href="{% url 'shop' %}" class="btn btn-dark rounded-0 fs-4 fw-light px-4 px-lg-5">See more</a>
+    </div>
+</div>
+
+<div class="row my-3 my-md-5 px-2 px-md-0 w-100 mx-0">
+    <div class="col-12 col-md-6 position-relative p-0 px-md-3">
+        <div class="overflow-hidden w-100 shadow">
+            <a href="{% url 'shop' %}" class="text-decoration-none w-100">
+                <p class="position-absolute text-light fs-1 men-title fw-bolder text-uppercase px-2">new arrival</p>
+                <img loading='lazy' src="{% static 'images/site-index/new-arrivals-1-min.jpg' %}" class="object-fit-cover position-relative gender-img" alt="banner_img">
+            </a>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 mt-4 mt-md-0 position-relative overflow-hidden p-0 px-md-3">
+        <div class="overflow-hidden w-100 shadow">
+            <a href="{% url 'shop' %}" class="text-decoration-none w-100">
+                <p class="position-absolute text-light fs-1 women-title fw-bolder text-uppercase px-2">gift</p>
+                <img loading='lazy' src="{% static 'images/site-index/new-arrivals-4-min.jpg' %}" class="object-fit-cover position-relative gender-img" alt="banner_img">
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock%}

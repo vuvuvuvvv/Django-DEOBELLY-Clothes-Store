@@ -1,0 +1,122 @@
+a:focus, input:focus, button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.category-checkbox {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.category-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    background-color: #fff;
+    border: 1px solid black;
+}
+
+.category-checkbox input:checked ~ .checkmark {
+    background-color: #000;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.category-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.category-checkbox .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+@media (max-width: 576px) {
+    .fs__14px {
+        font-size: 14px !important;
+    }
+}
+
+.object-fit-cover {
+    object-fit: cover !important;
+}
+
+.amountInput {
+    width: 36px;
+    border: none !important;
+    padding: 0;
+}
+
+.amountInput:focus, input:focus {
+    outline: none !important;
+}
+
+.amountInput, .btnDESC, .btnASC {
+    height: 36px !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+}
+
+.btnDESC, .btnASC {
+    box-sizing: border-box !important;
+    width: 36px !important;
+    padding: 6px 10px !important;
+}
+
+.bg-lighter-gray, .amountInput, .btnDESC, .btnASC {
+    background-color: #f5f5f5 !important;
+}
+
+select {
+    border: none;
+    background: #eee;
+    padding: 4px 3px;
+}
+
+select:focus {
+    outline: none;
+}
+
+.text-red {
+    color: #e80000 !important;
+}
+
+.fs-name {
+    font-size: 16px !important;
+}
+
+.fs-classify {
+    font-size: 14px !important;
+}
+
+.bg-red {
+    background-color: #e80000 !important;
+}

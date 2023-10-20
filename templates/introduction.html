@@ -1,0 +1,120 @@
+{% extends 'layouts/layout.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}
+DE OBELLY
+{% endblock %}
+
+{% block css %}
+<style>
+    .intro-quote {
+        background: url('/images/quote.png') no-repeat top left;
+        position: relative;
+        padding-left: 90px;
+        text-align: justify;
+   }
+</style>
+{% endblock %}
+{% block staticlink %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+
+
+{% block content %}
+<!-- Carousel wrapper -->
+<div class="full-width">
+    <div id="sliderHeader" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselBasicExample" data-bs-slide-to="0"
+                class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselBasicExample" data-bs-slide-to="1"
+                class="" aria-current="true" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselBasicExample" data-bs-slide-to="2"
+                class="" aria-current="true" aria-label="Slide 3"></button>
+        </div>
+        <!-- Inner -->
+        <div class="carousel-inner">
+            <!-- Single item -->
+            <div class="carousel-item active">
+                <img src="{% static 'images/slider/20211211162638-min.jpg' %}" class="d-block w-100" alt="..." />
+                <div class="carousel-caption d-none d-md-block">
+                    <!-- <h5></h5>
+                    <p></p> -->
+                </div>
+            </div>
+            <div class="carousel-item ">
+                <img src="{% static 'images/slider/20211211163001-min.jpg' %}" class="d-block w-100" alt="..." />
+                <div class="carousel-caption d-none d-md-block">
+                    <!-- <h5></h5>
+                    <p></p> -->
+                </div>
+            </div>
+            <div class="carousel-item ">
+                <img src="{% static 'images/slider/20211211162936-min.jpg' %}" class="d-block w-100" alt="..." />
+                <div class="carousel-caption d-none d-md-block">
+                    <!-- <h5></h5>
+                    <p></p> -->
+                </div>
+            </div>
+        </div>
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#sliderHeader" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#sliderHeader" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+
+<div class="shop-intro text-center pt-md-5 pb-2">
+        <img src="{% static 'images/stories/TUJ04917.jpg' %}" width="100%">
+        <h3 class="text-uppercase py-2">De Obelly Shop</h3>
+        <div class="intro-text px-3">
+            Với việc tập trung vào giá trị cốt lõi về chất lượng sản phẩm, cũng như phát triển dịch vụ,
+             kết hợp trải nghiệm khách hàng tại điểm bán lẻ nhằm cung cấp cho khách hàng sự tự tin, 
+             tính trang trọng và sự hứng khởi trong việc mua sắm, De Obelly đã phát triển đa dạng các dòng hàng, 
+             từ áo sơ mi, polo cho tới các bộ quần áo vest lịch lãm, hay các phụ kiện đồ da tinh tế. 
+             Tất cả các sản phẩm của De Obelly đều được sản xuất dưới tiêu chuẩn chất lượng sản phẩm của phân khúc xa xỉ
+              và cận xa xỉ với triết lý sử dụng các nguyên phụ liệu cao cấp và xa xỉ nhập khẩu từ các nhà máy 
+              có uy tín lâu năm đang sản xuất cho các thương hiệu xa xỉ, và gia công tại hệ thống các nhà máy 
+              nhượng quyền sản xuất được tuyển chọn của De Obelly đặt tại Ý, Bồ Đào Nha, Nhật, Ấn Độ, Trung Quốc, 
+              Việt Nam, Thái Lan… Sản phẩm bắt buộc phải trải qua các vòng kiểm tra chi tiết, đảm bảo chất lượng 
+              đúng chuẩn hàng xa xỉ Châu Âu – tiêu chuẩn mà De Obelly đã tuân thủ trong thời gian qua. Không chỉ 
+              quan tâm đặc biệt tới các vấn đề về sản xuất, De Obelly còn quan tâm tới việc thiết kế và chỉ đạo 
+              nghệ thuật để có được sự liền mạch trong trải nghiệm khách hàng. Với đội ngũ tư vấn về sáng tạo và 
+              truyền thông có uy tín quốc tế, De Obelly hứa hẹn sẽ mang lại làn gió mới cho ngành thời trang cao 
+              cấp và cận xa xỉ ở Việt Nam cũng như khu vực Đông Nam Á.
+        </div>
+</div>
+<div class="full-width pb-4 pb-md-5 d-none d-md-block">
+    <img src="{% static 'images/stories/brand2.jpg' %}" width="100%">
+</div>
+<div class="container-md p-0">
+    <div class="row quotes pb-4 pb-md-5 text-center w-100 mx-0 px-2 align-items-md-center justify-content-md-center">
+            <div class="col-12 col-md-1"></div>
+            <div class="col-12 col-md-5">
+                <img src="{% static 'images/stories/handsome.jpg' %}" width="100%">
+            </div>
+            <div class="col-12 col-md-5 intro-quote mt-3 mt-md-0 pt-md-0 pe-0">
+                “Từ khi ra đời đến nay, chúng tôi luôn kiên định với sứ mệnh tái hiện nét thanh lịch tự nhiên 
+                và phong cách Ý tại khu vực Đông Nam Á. Đó là lý do chúng tôi tồn tại và làm việc mỗi ngày. 
+                Chúng tôi đặc biệt quan tâm tới việc phục vụ khách hàng với những sản phẩm tinh tế, xa xỉ cùng
+                 chất lượng vượt trội và phong cách thanh lịch tự nhiên. Sự tập trung vào việc đổi mới liên 
+                 tục giúp chúng tôi phục vụ khách hàng ngày càng hiệu quả hơn.”
+            </div>
+            <div class="col-12 col-md-1"></div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock%}

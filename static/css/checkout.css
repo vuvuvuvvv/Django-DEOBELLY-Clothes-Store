@@ -1,0 +1,114 @@
+.product-quantity {
+    height: 25px;
+    max-height: 25px;
+    width: 25px;
+    max-width: 25px;
+    border-radius: 50%;
+    position: absolute;
+    background-color: #ec0000;
+    color: #fff;
+    text-align: center;
+    top: 0;
+    right: -11px;
+    z-index: 2;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-name {
+    display: block;
+    display: -webkit-box;
+    margin: 0 !important;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+}
+
+.bg-lighter-gray {
+    background-color: rgba(222, 222, 222, 0.26) !important;
+}
+
+.bg-red {
+    background-color: #e80000 !important;
+}
+
+.product-in-cart {
+    height: 350px;
+    overflow: scroll;
+    padding: 0 !important;
+}
+
+@media (max-width: 576px) {
+    .fs-xsm__12px {
+        font-size: 12px !important;
+    }
+}
+
+.container-label {
+    display: block;
+    position: relative;
+    padding-left: 27px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.container-label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #cecece;
+    border-radius: 50%;
+}
+
+.container-label input:checked ~ .checkmark {
+    background-color: #e80000;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.container-label input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.container-label .checkmark:after {
+    top: 7px;
+    left: 7px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: white;
+}
+
+a:focus, button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.bg-lighter-danger {
+    background-color: rgba(255, 0, 0, 0.06) !important;
+}
+
+#toastBoard {
+    z-index: 9999;
+    bottom: 5px;
+    right: 15px;
+    width: 260px;
+}

@@ -1,0 +1,43 @@
+.full-width {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 49%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
+#sliderHeader .carousel-inner .carousel-item img {
+    height: 100vh;
+    object-fit: cover;
+}
+
+@-webkit-keyframes zoom {
+    from {
+        -webkit-transform: scale(1, 1);
+    }
+    to {
+        -webkit-transform: scale(1.3, 1.3);
+    }
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(1, 1);
+    }
+    to {
+        transform: scale(1.3, 1.3);
+    }
+}
+
+#sliderHeader .carousel-inner img {
+    -webkit-animation: zoom 20s;
+    animation: zoom 20s infinite;
+}
+
+/* END SLIDER */
+.intro-text > p {
+    text-align: justify;
+    color: #666666;
+    font-family: "Montserrat", sans-serif;
+}
