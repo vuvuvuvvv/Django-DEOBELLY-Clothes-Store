@@ -1,10 +1,18 @@
-let category, type, typeName, cursor, sort, show_per_page, cdnUrl, imgUrl, buyNow, keyWord;
+let category, type, typeName, cursor, sort, keyWord;
+
 let myUrl = location;
+
 let toastLive = document.getElementById('liveToast');
 //get param
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
+
 let keySearch = $('#content-search').attr('data-query');
+
+function truncateData() {
+    category, type, typeName, cursor, sort, keyWord = null
+}
+
 //get param
 const parseUrlQuery = (value) => {
     let urlParams = new URL(value).searchParams
@@ -13,6 +21,7 @@ const parseUrlQuery = (value) => {
         return acc
     }, {})
 }
+
 if (parseUrlQuery(myUrl)['type'] !== undefined) {
     type = parseUrlQuery(myUrl)['type'][0];
 }
@@ -225,47 +234,47 @@ function requestData() {
     }
 }
 
-function addToFavorite(obj) {
-    var productID = obj.getAttribute('data-id');
-    if ($('#sth').attr('data-id') == 1) {
-        window.location.href = "/site/login?ref=" + window.location.pathname;
-    } else {
-        let request = $.ajax({
-            url: "/api/ajax/add-to-favorite", // send request to
-            method: "POST", // sending method
-            data: {
-                id: productID,
-            },
-        });
-        request.done(function (response) {
-            let arrRes = $.parseJSON(response);
-            if (arrRes.status === 1) {
-                let toast = new bootstrap.Toast(toastLive);
-                $('#toastNotify').html('<i class="fas fa-check-circle"></i> ' + arrRes.message);
-                toast.show();
-                $('#toastBoard, #liveToast').removeClass('bg-danger text-light').addClass('bg-success text-light');
-                setTimeout(function () {
-                    toast.hide(200);
-                    $('#toastNotify').html('');
-                }, 2000);
-            } else {
-                let toast = new bootstrap.Toast(toastLive);
-                $('#toastNotify').html('<i class="far fa-frown-open"></i> ' + arrRes.message);
-                toast.show();
-                $('#toastBoard, #liveToast').removeClass('bg-success text-light').addClass('bg-danger text-light');
-                setTimeout(function () {
-                    toast.hide(200);
-                    $('#toastNotify').html('');
-                }, 2000);
-            }
-        });
-        request.fail(function (jqXHR, textStatus) {
-            // alert("Request failed: " + textStatus); // check errors
-            console.log('jq', jqXHR);
-            console.log('sta', textStatus);
-        });
-    }
-}
+// function addToFavorite(obj) {
+//     var productID = obj.getAttribute('data-id');
+//     if ($('#sth').attr('data-id') == 1) {
+//         window.location.href = "/site/login?ref=" + window.location.pathname;
+//     } else {
+//         let request = $.ajax({
+//             url: "/api/ajax/add-to-favorite", // send request to
+//             method: "POST", // sending method
+//             data: {
+//                 id: productID,
+//             },
+//         });
+//         request.done(function (response) {
+//             let arrRes = $.parseJSON(response);
+//             if (arrRes.status === 1) {
+//                 let toast = new bootstrap.Toast(toastLive);
+//                 $('#toastNotify').html('<i class="fas fa-check-circle"></i> ' + arrRes.message);
+//                 toast.show();
+//                 $('#toastBoard, #liveToast').removeClass('bg-danger text-light').addClass('bg-success text-light');
+//                 setTimeout(function () {
+//                     toast.hide(200);
+//                     $('#toastNotify').html('');
+//                 }, 2000);
+//             } else {
+//                 let toast = new bootstrap.Toast(toastLive);
+//                 $('#toastNotify').html('<i class="far fa-frown-open"></i> ' + arrRes.message);
+//                 toast.show();
+//                 $('#toastBoard, #liveToast').removeClass('bg-success text-light').addClass('bg-danger text-light');
+//                 setTimeout(function () {
+//                     toast.hide(200);
+//                     $('#toastNotify').html('');
+//                 }, 2000);
+//             }
+//         });
+//         request.fail(function (jqXHR, textStatus) {
+//             // alert("Request failed: " + textStatus); // check errors
+//             console.log('jq', jqXHR);
+//             console.log('sta', textStatus);
+//         });
+//     }
+// }
 
 function first() {
     if ($('#current_page').val() != 0) {
@@ -311,3 +320,11 @@ $('#remove-keyword').click(function () {
     $('#notify-search').addClass('d-none');
     requestData();
 });
+
+function search() {
+    truncateData();
+    if ($.trim($("#key-word").val()) != '') {
+        keyWord  = $("#key-word").val()
+        requestParam()
+    }
+}

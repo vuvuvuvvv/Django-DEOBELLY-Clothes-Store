@@ -30,10 +30,8 @@ class Shop(View):
                 '2':'-selling_price',
                 '3':'-created_at'
             }
-            print(keyword)
 
             if keyword:
-                print(keyword)
                 # Khởi tạo một Q object trống
                 word_conditions = Q()
 

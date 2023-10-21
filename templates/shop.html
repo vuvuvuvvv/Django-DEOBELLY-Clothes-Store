@@ -30,7 +30,7 @@ DE OBELLY - Điều khoản & Dịch vụ
 <div class="d-none" id="sth" data-id="{% if user.is_authenticated %}0{% else %}1{% endif %}"></div>
 <div class="row w-100 pt-4 d-flex align-items-center justify-content-center px-3">
     <div class="w-search col-12 col-md-8 col-lg-6 position-relative p-0">
-        <button type="button" class="position-absolute btn-search"><i class="fas fa-search"></i></button>
+        <button type="button" class="position-absolute btn-search" onclick="search()"><i class="fas fa-search"></i></button>
         <input type="text" id="key-word" placeholder="Nhập từ khóa tìm kiếm" class="w-100 position-relative key-word">
     </div>
 </div>
