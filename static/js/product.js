@@ -4,7 +4,7 @@ let toastLive = document.getElementById('liveToast');
 //get param
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-let keySearch = urlParams.get('search');
+let keySearch = $('#content-search').attr('data-query');
 //get param
 const parseUrlQuery = (value) => {
     let urlParams = new URL(value).searchParams
@@ -21,7 +21,7 @@ if (parseUrlQuery(myUrl)['type'] !== undefined) {
 jQuery(document).ready(function () {
     $('#current_page').val(0);
     requestParam()
-    requestData()
+    // requestData()
 });
 
 function requestParam() {
@@ -38,24 +38,7 @@ function requestParam() {
             $('#content-search').html('');
         }
     }
-    // let request = $.ajax({
-    //     url: "/api/ajax/get-link-and-title", // send request to
-    //     method: "POST", // sending method
-    //     headers: {
-    //         'X-CSRF-TOKEN': csrftoken
-    //     },
-    // });
-    // request.done(function (response) {
-    //     let arrRes = $.parseJSON(response);
-    //     cdnUrl = arrRes.cdnUrl;
-    //     imgUrl = arrRes.imgUrl;
-    //     show_per_page = arrRes.showPerPage;
-    //     buyNow = arrRes.buyNow;
-    //     requestData();
-    // });
-    // request.fail(function (jqXHR, textStatus) {
-    //     alert("Request failed: " + textStatus); // check errors
-    // });
+    requestData();
 }
 
 let checkboxes = $('input[type=checkbox]');

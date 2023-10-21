@@ -18,7 +18,7 @@ class ProductType(models.Model):
 
     @classmethod
     def get_all_product_type(cls):
-        return cls.objects.filter(status = STATUS_ACTIVE).values()
+        return cls.objects.filter(status = STATUS_ACTIVE).all()
 
 # Suit, Vest, Ví, Túi, Giày, Dây lưng,
 class ProductCategory(models.Model):

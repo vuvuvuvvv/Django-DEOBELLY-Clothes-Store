@@ -10,18 +10,17 @@ from django.contrib.auth import login as auth_login
 @receiver(user_signed_up)
 def save_user_gmail_picture_url(sender,**kwargs):
     sociallogin = kwargs['sociallogin']
-    print('oke')
-    print(f'sociallogin: {sociallogin}')
+    # print(f'sociallogin: {sociallogin}')
     provider = sociallogin.account.provider
-    print(f'provider: {provider}')
+    # print(f'provider: {provider}')
     provider_data = sociallogin.account.extra_data
-    print(f'data: {provider_data}')
+    # print(f'data: {provider_data}')
     if provider == 'facebook':
         # user_data = user.socialaccount_set.filter(provider='facebook')[0].extra_data
         # picture_url = "http://graph.facebook.com/" + sociallogin.account.uid + "/picture?type=large"            
         # email = user_data['email']
         # first_name = user_data['first_name']
-        print('oke')
+        # print('oke')
         return redirect('home')
 
     # print(f'pr_data: {provider_data}\n') #get information of gg login

@@ -101,7 +101,7 @@ urlpatterns = [
 
     #api
     path('api_check_user_validated/', acc_views.check_user_validated, name='api_check_user_validated'),
-    path('api_product_filter/',pr_views.product_filter_ajax, name='product_filter_api'),
+    path('api_product_filter/',pr_views.Shop.as_view(), name='product_filter_api'),
     path('api_geolocation_get_address/',core_views.get_geolocation, name='geolocation_filter_api'),
     path('cart/add-to-cart/',cart_views.CartView.as_view(), name='add_cart'),
     path('cart/update-cart/',cart_views.CartView.as_view(), name='update_cart'),

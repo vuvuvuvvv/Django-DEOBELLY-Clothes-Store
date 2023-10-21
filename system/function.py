@@ -25,12 +25,12 @@ def generate_random_password_and_hash(length=12):
     password = ''.join(random.choice(characters) for _ in range(length))
     return make_password(password)
 
-
-
 def to_slug(str):
     str = str.strip()
     str = unidecode(str)
     str = re.sub(r'[-\s]+', '-', str)
     slug = str.lower()
-    
     return slug
+
+def set_session_order_successful(req):
+    req.session['order'] = "Thành công!"

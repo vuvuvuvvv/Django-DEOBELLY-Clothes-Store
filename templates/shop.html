@@ -27,17 +27,26 @@ DE OBELLY - Điều khoản & Dịch vụ
 {% endblock %}
 
 {% block content %}
-<div class="visually-hidden" id="sth" data-id="{% if user.is_authenticated %}0{% else %}1{% endif %}"></div>
-<div class="row p-0 pt-md-5 d-none" id="notify-search">
-    <!-- todo -->
+<div class="d-none" id="sth" data-id="{% if user.is_authenticated %}0{% else %}1{% endif %}"></div>
+<div class="row w-100 pt-4 d-flex align-items-center justify-content-center px-3">
+    <div class="w-search col-12 col-md-8 col-lg-6 position-relative p-0">
+        <button type="button" class="position-absolute btn-search"><i class="fas fa-search"></i></button>
+        <input type="text" id="key-word" placeholder="Nhập từ khóa tìm kiếm" class="w-100 position-relative key-word">
+    </div>
+</div>
+
+{% if query %}
+<div class="row p-0 pt-md-4" id="notify-search">
     <div class="w-100 align-items-center justify-content-center d-flex">
         <span class="fs-5 text-center">
-            Kết quả tìm kiếm cho: <i id="content-search"></i> <button
+            Kết quả tìm kiếm cho: <i id="content-search" data-query="{{ query }}">{{ query }}</i> <button
                 class="p-0 text-dark fs-6 m-0 btn bg-transparent" id="remove-keyword"><i
                     class="fas fa-times-circle"></i></button>
         </span>
     </div>
 </div>
+{% endif %}
+
 <div class="row m-0 p-0 pt-4 w-100">
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasCategory"
         aria-labelledby="offcanvasCategoryLabel">
@@ -49,20 +58,19 @@ DE OBELLY - Điều khoản & Dịch vụ
         <div class="offcanvas-body p-0">
             <div class="accordion accordion-flush ct-show" id="type_category_offcanvas">
                 {% for type in product_types %}
-                {% with id_encrypted=type.id|encrypt_string %}
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="offcanvas-flush-heading-{{ id_encrypted }}">
+                    <h2 class="accordion-header" id="offcanvas-flush-heading-{{ type.slug }}">
                         <button class="accordion-button collapsed text-uppercase fw-light btn-title-category"
-                            type="button" data-bs-toggle="collapse" data-type="{{ id_encrypted }}"
+                            type="button" data-bs-toggle="collapse" data-type="{{ type.slug }}"
                             data-type-name="{{ type.name }}"
-                            data-bs-target="#offcanvas-flush-collapse-{{ id_encrypted }}" aria-expanded="false"
-                            aria-controls="offcanvas-flush-collapse-{{ id_encrypted }}">
+                            data-bs-target="#offcanvas-flush-collapse-{{ type.slug }}" aria-expanded="false"
+                            aria-controls="offcanvas-flush-collapse-{{ type.slug }}">
                             {{ type.name }}
                         </button>
                     </h2>
-                    <div id="offcanvas-flush-collapse-{{ id_encrypted }}"
+                    <div id="offcanvas-flush-collapse-{{ type.slug }}"
                         class="accordion-collapse collapse ps-4 ps-md-5 py-3"
-                        aria-labelledby="offcanvas-flush-heading-{{ id_encrypted }}"
+                        aria-labelledby="offcanvas-flush-heading-{{ type.slug }}"
                         data-bs-parent="#type_category_offcanvas">
                         {% for cate in type.categories.all %}
                         <label class="category-checkbox">{{ cate.name }}
@@ -72,7 +80,6 @@ DE OBELLY - Điều khoản & Dịch vụ
                         {% endfor %}
                     </div>
                 </div>
-                {% endwith %}
                 {% endfor %}
             </div>
         </div>
@@ -116,27 +123,25 @@ DE OBELLY - Điều khoản & Dịch vụ
         </div>
         <div class="accordion accordion-flush w-100 pb-5" id="type_category">
             {% for type in product_types %}
-            {% with id_encrypted=type.id|encrypt_string %}
             <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-heading-{{ id_encrypted }}">
+                <h2 class="accordion-header" id="flush-heading-{{ type.slug }}">
                     <button class="accordion-button collapsed text-uppercase fw-light btn-title-category" type="button"
-                        data-bs-toggle="collapse" data-type="{{ id_encrypted }}" data-type-name="{{ type.name }}"
-                        data-bs-target="#flush-collapse-{{ id_encrypted }}" aria-expanded="false"
-                        aria-controls="flush-collapse-{{ id_encrypted }}">
+                        data-bs-toggle="collapse" data-type="{{ type.slug }}" data-type-name="{{ type.name }}"
+                        data-bs-target="#flush-collapse-{{ type.slug }}" aria-expanded="false"
+                        aria-controls="flush-collapse-{{ type.slug }}">
                         {{ type.name }}
                     </button>
                 </h2>
-                <div id="flush-collapse-{{ id_encrypted }}" class="accordion-collapse collapse ps-4 ps-md-5"
-                    aria-labelledby="flush-heading-{{ id_encrypted }}" data-bs-parent="#type_category">
+                <div id="flush-collapse-{{ type.slug }}" class="accordion-collapse collapse ps-4 ps-md-5"
+                    aria-labelledby="flush-heading-{{ type.slug }}" data-bs-parent="#type_category">
                     {% for cate in type.categories.all %}
                     <label class="category-checkbox mt-2">{{ cate.name }}
-                        <input type="checkbox" type="{{ cate.id }}">
+                        <input type="checkbox" data-value="{{ cate.slug }}">
                         <span class="checkmark"></span>
                     </label>
                     {% endfor %}
                 </div>
             </div>
-            {% endwith %}
             {% endfor %}
         </div>
     </div>

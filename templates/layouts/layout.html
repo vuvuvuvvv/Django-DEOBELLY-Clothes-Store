@@ -1,6 +1,6 @@
 {% load static %}
-{% load custom_filters %}
 {% csrf_token %}
+{% load custom_filters %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,7 +51,7 @@
     </title>
 
     <!-- Internal css -->
-    {% block css %}
+    {% block header %}
     {% endblock %}
     <style>
         input[type=search] {
@@ -77,6 +77,8 @@
 
         .btn-search {
             z-index: 1;
+            top: 50%;
+            transform: translateY(-50%);
             right: 0;
             outline: none;
             border: none;
@@ -96,12 +98,6 @@
 
         .key-word::placeholder {
             color: #919191 !important;
-        }
-
-        .key-word:focus {
-            box-shadow: none;
-            border: 1px solid rgba(0, 0, 0, 0.89);
-            border-radius: 20px;
         }
 
         @media (min-width: 992px) {
@@ -159,7 +155,8 @@
         <div id="content">
             <div class="offcanvas offcanvas-end" id="offcanvas-search">
                 <!-- Todo: -->
-                <form method="post" action="{% url 'search_product' %}" class="w-100">
+                <form method="post" action="{% url 'shop' %}" class="w-100">
+                    {% csrf_token %}
                     <div class="offcanvas-header px-3 py-0 border-bottom">
                         <div class="d-flex">
                             <img src="{% static 'images/logo.png' %}" style="height:64px">
@@ -172,7 +169,7 @@
                                 <button type="submit" class="position-absolute btn-search"><i
                                         class="fas fa-search"></i></button>
                                 <input type="text" placeholder="Nhập từ khóa tìm kiếm"
-                                    class="w-100 position-relative key-word" name="search" required>
+                                    class="w-100 position-relative key-word" name="query" required>
                             </div>
                         </div>
                         <div class="w-100 text-center py-2">
