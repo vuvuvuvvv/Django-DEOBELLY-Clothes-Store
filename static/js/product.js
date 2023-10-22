@@ -1,19 +1,11 @@
 let category, type, typeName, cursor, sort, keyWord;
 
-let myUrl = location;
-
 let toastLive = document.getElementById('liveToast');
-//get param
+
+
+//get param in url
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
-
-let keySearch = $('#content-search').attr('data-query');
-
-function truncateData() {
-    category, type, typeName, cursor, sort, keyWord = null
-}
-
-//get param
 const parseUrlQuery = (value) => {
     let urlParams = new URL(value).searchParams
     return Array.from(urlParams.keys()).reduce((acc, key) => {
@@ -22,9 +14,14 @@ const parseUrlQuery = (value) => {
     }, {})
 }
 
+//Check type in param
+let myUrl = location;
 if (parseUrlQuery(myUrl)['type'] !== undefined) {
     type = parseUrlQuery(myUrl)['type'][0];
 }
+
+// Get search query 
+let keySearch = $('#content-search').attr('data-query');
 
 //send request to get link & title
 jQuery(document).ready(function () {
@@ -34,7 +31,7 @@ jQuery(document).ready(function () {
 });
 
 function requestParam() {
-    if (keySearch != null) {
+    if (keySearch != null && keySearch != undefined && keySearch != '') {
         keyWord = keySearch;
         $('#notify-search').removeClass('d-none');
         $('#content-search').html(keyWord);
@@ -52,23 +49,23 @@ function requestParam() {
 
 let checkboxes = $('input[type=checkbox]');
 $('.accordion-button').click(function () {
+    truncateData()
     checkboxes.prop("checked", false);
     $('#current_page').val(0);
-    cursor = category = sort = null;
     if (!$(this).hasClass('collapsed')) {
         type = $(this).attr('data-type');
         typeName = $(this).attr('data-type-name');
     } else {
         type = typeName = null;
     }
-    requestData();
+    requestParam();
 });
 
 let categoryCb = $('.category-checkbox input[type=checkbox]');
 categoryCb.change(function () {
+    truncateData()
     category = getCheckedBoxes(categoryCb);
     $('#current_page').val(0);
-    cursor = sort = null;
     requestData();
 });
 
@@ -96,7 +93,7 @@ $(".sortByDate").click(function () {
 function getCheckedBoxes(checkbox) {
     return checkbox.filter(":checked")
         .map(function () {
-            return this.value;
+            return $(this).attr('data-value');
         })
         .get();
 }
@@ -161,16 +158,12 @@ function requestData() {
                 }
                 $("#result").html(result);
                 //show pagination
-                let number_of_items = arrRes.count;
-                let number_of_pages = Math.ceil(number_of_items / 9);
+                let number_of_items = arrRes.amount;
+                let product_per_page = 8
+                let number_of_pages = Math.ceil(number_of_items / product_per_page);
+                console.log(number_of_pages, number_of_items);
                 jQuery(document).ready(function () {
-                    let navigation_html = `
-                    <a class="first_link" href="javascript:first();">
-                        &#10094;&#10094;
-                    </a>
-                    <a class="previous_link" href="javascript:previous();">
-                        &#10094;
-                    </a>`;
+                    let navigation_html = '<a class="first_link" href="javascript:first();">&#10094;&#10094;</a><a class="previous_link" href="javascript:previous();">&#10094;</a>';
                     let current_link = 0;
                     while (number_of_pages > current_link) {
                         navigation_html += ' <a class="page_link" href="javascript:go_to_page(' + current_link + ')" id="page' + (current_link + 1) + '">' + (current_link + 1) + '</a>';
@@ -233,49 +226,6 @@ function requestData() {
         $('#sm-offcanvas-close').trigger('click');
     }
 }
-
-// function addToFavorite(obj) {
-//     var productID = obj.getAttribute('data-id');
-//     if ($('#sth').attr('data-id') == 1) {
-//         window.location.href = "/site/login?ref=" + window.location.pathname;
-//     } else {
-//         let request = $.ajax({
-//             url: "/api/ajax/add-to-favorite", // send request to
-//             method: "POST", // sending method
-//             data: {
-//                 id: productID,
-//             },
-//         });
-//         request.done(function (response) {
-//             let arrRes = $.parseJSON(response);
-//             if (arrRes.status === 1) {
-//                 let toast = new bootstrap.Toast(toastLive);
-//                 $('#toastNotify').html('<i class="fas fa-check-circle"></i> ' + arrRes.message);
-//                 toast.show();
-//                 $('#toastBoard, #liveToast').removeClass('bg-danger text-light').addClass('bg-success text-light');
-//                 setTimeout(function () {
-//                     toast.hide(200);
-//                     $('#toastNotify').html('');
-//                 }, 2000);
-//             } else {
-//                 let toast = new bootstrap.Toast(toastLive);
-//                 $('#toastNotify').html('<i class="far fa-frown-open"></i> ' + arrRes.message);
-//                 toast.show();
-//                 $('#toastBoard, #liveToast').removeClass('bg-success text-light').addClass('bg-danger text-light');
-//                 setTimeout(function () {
-//                     toast.hide(200);
-//                     $('#toastNotify').html('');
-//                 }, 2000);
-//             }
-//         });
-//         request.fail(function (jqXHR, textStatus) {
-//             // alert("Request failed: " + textStatus); // check errors
-//             console.log('jq', jqXHR);
-//             console.log('sta', textStatus);
-//         });
-//     }
-// }
-
 function first() {
     if ($('#current_page').val() != 0) {
         go_to_page(0);
@@ -327,4 +277,15 @@ function search() {
         keyWord  = $("#key-word").val()
         requestParam()
     }
+}
+
+function truncateData() {
+    category = null;
+    type = null;
+    typeName = null;
+    cursor = null;
+    sort = null;
+    keyWord = null;
+    keySearch = null;
+    $("#content-search").html('').attr('data-query','');
 }

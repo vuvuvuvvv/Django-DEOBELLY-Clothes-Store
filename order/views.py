@@ -37,6 +37,7 @@ class CheckoutView(View):
             order_instance.save()
             cart = Cart.objects.get(user = req.user)
             cart.delete()
+            req.session['create_order_success'] = True
             return redirect('cart')
         else:
             return render(req, self.template_name, {'form': form})

@@ -180,7 +180,7 @@
                     data-bs-parent="#accordionInformation">
                     <div class="accordion-body fw-light border-bottom border-dark">
                         {% if product.description %}
-                        {{ product.description }}
+                        {{ product.description|safe }}
                         {% else %}
                         Chưa có mô tả cho sản phẩm này!
                         {% endif %}

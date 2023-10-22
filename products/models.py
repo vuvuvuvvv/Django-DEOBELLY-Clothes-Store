@@ -30,6 +30,10 @@ class ProductCategory(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.name
+    
+    @classmethod
+    def get_category_by_slug(cls,slug):
+        return cls.objects.get(slug = slug)
 
 class Product(models.Model):
     name = models.CharField(max_length=255)

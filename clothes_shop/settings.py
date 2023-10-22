@@ -88,6 +88,8 @@ MIDDLEWARE = [
     'social_django.middleware.SocialAuthExceptionMiddleware', 
 ]
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
 ROOT_URLCONF = 'clothes_shop.urls'
 
 TEMPLATES = [

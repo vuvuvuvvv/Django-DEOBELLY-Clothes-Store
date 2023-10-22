@@ -10,19 +10,17 @@
 
 <div class="w-100 m-0 p-0 row">
     {% for field in form %}
-        {% if field.name == 'specific_address' %}
+    {% if field.name == 'specific_address' %}
         <div class="form-group mb-1 col-12">
             <label for="provinceDataList" class="form-label">Tỉnh/Thành phố</label>
             <select class="form-select" aria-label="Default select example" name="provinve" id="provinceDataList" required>
             </select>
         </div>
-
         <div class="form-group mb-1 col-12">
             <label for="districtDataList" class="form-label">Quận / Huyện</label>
             <select class="form-select" aria-label="Default select example" name="district" id="districtDataList" disabled required>
             </select>
         </div>
-
         <div class="form-group mb-1 col-12">
             <label for="wardsDataList" class="form-label">Xã/Phường/Thị trấn</label>
             <select class="form-select" aria-label="Default select example" name="wards" id="wardsDataList" disabled required>

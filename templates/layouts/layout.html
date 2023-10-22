@@ -19,12 +19,12 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'fontawesome-free-5.15.2-web/css/all.css' %}">
     <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
-
+<!-- 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js" integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js" integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
-    <!-- <link rel="stylesheet" href="{% static 'css/bootstrap-5.3.1.min.css' %}">
-    <script src="{% static 'js/bootstrap-5.3.1.min.js' %}"></script> -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap-5.3.1.min.css' %}">
+    <script src="{% static 'js/bootstrap-5.3.1.min.js' %}"></script>
     <script src="{% static 'fontawesome-free-5.15.2-web/js/all.js' %}"></script>
     <script src="{% static 'js/sweetalert.min.js' %}"></script>
     <script>
@@ -288,10 +288,14 @@
                                     {% if user.is_authenticated %}
                                     <!-- User -->
                                     <div class="d-flex align-items-center p-3">
-                                        <div class="col-3 p-0">
+                                        <div class="col-2 p-0">
                                             <div class="user__avatar img-circle">
                                                 <!-- Avatar image -->
+                                                {% if user.avatar %}
+                                                <img src="{{user.avatar}}" class="w-100" style="object-fit: cover;"/>
+                                                {% else %}
                                                 <i class="far fa-user text-light fa-2x"></i>
+                                                {% endif %}
                                             </div>
                                         </div>
                                         <div class="col-9 ps-2 text-light">
@@ -300,7 +304,7 @@
                                             Online
                                         </div>
                                     </div>
-                                    <!-- End user -->>
+                                    <!-- End user -->
                                     {% endif %}
                                     <!-- sm,md Navbar -->
                                     <div class="mobile-navbar border-light border-top">
@@ -326,12 +330,17 @@
                                                             <div id="collapseOne" class="accordion-collapse collapse"
                                                                 data-bs-parent="#accordionExample">
                                                                 <ul class="nav-treeview px-3 list-unstyled">
-                                                                    <!-- Todo: Loai san pham -->
-                                                                    {% for value in mainType %}
                                                                     <li class="nav-item">
-                                                                        <a href="{% url 'shop' type=value.id|encrypt_string %}"
+                                                                        <a href="{% url 'shop'%}"
                                                                             class="nav-link d-block">
-                                                                            <p>{{ value.name }}</p>
+                                                                            <p>Shop</p>
+                                                                        </a>
+                                                                    </li>
+                                                                    {% for type in product_type %}
+                                                                    <li class="nav-item">
+                                                                        <a href="{% url 'shop'%}?type={{type.slug}}"
+                                                                            class="nav-link d-block">
+                                                                            <p>{{ type.name }}</p>
                                                                         </a>
                                                                     </li>
                                                                     {% endfor %}
@@ -339,11 +348,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </li>
-                                                <li class="nav-item border-bottom border-light">
-                                                    <a href="{% url 'shop' %}" class="nav-link text-uppercase p-3">
-                                                        <p class="m-0 fs__15px">Shop</p>
-                                                    </a>
                                                 </li>
                                                 <li class="nav-item border-bottom border-light">
                                                     <a href="{% url 'terms' %}" class="nav-link text-uppercase p-3">
@@ -407,7 +411,7 @@
                                     </li>
                                     {% for type in product_type %}
                                     <li class="nav-item p-2">
-                                        <a href="{% url 'shop' %}?type={{ type.slug|encrypt_string}}" class="site-nav-link">
+                                        <a href="{% url 'shop' %}?type={{ type.slug}}" class="site-nav-link">
                                             <span>{{ type.name }}</span>
                                         </a>
                                     </li>
@@ -427,7 +431,7 @@
                                 class="col-12 d-none d-md-flex d-lg-none align-items-center justify-content-center nav-tablet bg-white border-top border-bottom">
                                 {% for type in product_type %}
                                 <li class="nav-item p-2">
-                                    <a href="{% url 'shop'%}?type={{ type.slug|encrypt_string }}" class="site-nav-link">
+                                    <a href="{% url 'shop'%}?type={{ type.slug }}" class="site-nav-link">
                                         <span>{{ type.name }}</span>
                                     </a>
                                 </li>

@@ -13,6 +13,12 @@
 {% endblock %}
 
 {% block content %}
+{% if msg %}
+<script>
+    swal("Thành công!", "Đơn hàng của bạn đã được khởi tạo!", "Ok");
+</script>
+{% endif %}
+
 
 {% if carts %}
 <div class="w-100 row mx-0 px-2 py-2 my-2 border-bottom d-none d-lg-flex">

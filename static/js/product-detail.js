@@ -42,7 +42,7 @@ $("#amountInput").keypress(function (e) {
 });
 $('#btnAddToCart').click(function () {
     if ($('#sth').attr('data-id') == 1) {
-        window.location.href = "/frontend/web/site/login?ref=" + window.location.pathname + '?detail=' + $('.product-information').attr('data-id');
+        window.location.href = "/login?ref=" + window.location.pathname + '?detail=' + $('.product-information').attr('data-id');
     } else {
         if ($('#quantity').attr('data-quantity') != 0) {
             if ($('#color').attr('data-color') == '' || $('#size').attr('data-size') == '') {
@@ -60,7 +60,7 @@ $('#btnAddToCart').click(function () {
 });
 $('#btnBuyNow').click(function (e) {
     if ($('#sth').attr('data-id') == 1) {
-        window.location.href = "/frontend/web/site/login?ref=" + window.location.pathname + '?detail=' + $('.product-information').attr('data-id');
+        window.location.href = "/login?ref=" + window.location.pathname + '?detail=' + $('.product-information').attr('data-id');
     } else {
         if ($('#color').attr('data-color') == '' || $('#size').attr('data-size') == '') {
             e.preventDefault();

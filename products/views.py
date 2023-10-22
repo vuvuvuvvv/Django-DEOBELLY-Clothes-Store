@@ -18,11 +18,11 @@ class Shop(View):
     def post(self, req):
         if 'api_product_filter' in req.path:
             data = json.loads(req.body)
-            category = data.get('cate')
+            categories = data.get('cate')
             cursor = data.get('cursor')
             product_type = data.get('type')
             sort = data.get('sort')
-
+            # print(categories)
             keyword = data.get('search')
 
             sort_types = {
@@ -30,36 +30,65 @@ class Shop(View):
                 '2':'-selling_price',
                 '3':'-created_at'
             }
-
+            
+            # Tạo query set sản phẩm:
+            products = Product.objects
+            
             if keyword:
+                # Query theo kyword
                 # Khởi tạo một Q object trống
                 word_conditions = Q()
 
-                # Bẻ nhỏ keyword tạo dsach các điều kiện so sánh ư
+                # Bẻ nhỏ keyword tạo dsach các điều kiện so sánh
                 for w in keyword.split(" "):
                     # word_conditions |= Q(name__icontains=str(w))
                     word_conditions &= Q(name__icontains=str(w))
                 # Kiểm tra điều kiện lọc
-                if sort:
-                    products = Product.objects.filter(word_conditions).order_by(sort_types[str(sort)])
+                products = products.filter(word_conditions).filter(status = STATUS_ACTIVE)
+
+            # Check theo loại sản phẩm
+            if product_type:
+                #Lấy ra danh mục theo loại sản phẩm
+                get_all_categories = ProductType.objects.get(slug = product_type).categories.all()
+                if get_all_categories:
+                    cate_conditions = Q()
+                    for cate in get_all_categories:
+                        if cate:
+                            cate_conditions |= Q(category=cate)
+                    # Kiểm tra điều kiện lọc
+                    products = products.filter(cate_conditions)
                 else:
-                    products = Product.objects.filter(word_conditions)
+                    products = None
+            if categories:
+                cate_conditions = Q()
+                for cate in categories:
+                    if cate:
+                        cate_conditions |= Q(category=ProductCategory.get_category_by_slug(cate))
+                    # Kiểm tra điều kiện lọc
+                products = products.filter(cate_conditions)
+            if products:
+                # Check kèm danh mục sản phẩm
+                if sort:
+                    products = products.order_by(sort_types[str(sort)])
+                # Return list
+                products = list(products.values())
+                if not cursor:
+                    cursor = 0
+                start = cursor*PRODUCT_PER_PAGE
+                amount = len(products)
+                end = (cursor+1)*PRODUCT_PER_PAGE if amount > (cursor+1)*PRODUCT_PER_PAGE else amount
+
+                #Pagination
+                products = products[start:end]
+                result = {
+                    'status': STATUS_ACTIVE,
+                    'products': products,
+                    'amount':amount
+                }
             else:
-                if sort:
-                    products = Product.objects.all().order_by(sort_types[str(sort)])
-                else:
-                    products = Product.objects.all()
-
-            # if sort:
-            #     products.order_by(sort_types[str(sort)])
-    
-            # for prd in products.values():
-            #     print(prd['selling_price'])
-
-            result = {
-                'status': STATUS_ACTIVE,
-                'products': list(products.values())
-            }
+                result = {
+                    'status': STATUS_INACTIVE
+                }
             return JsonResponse(result)
         else:
             query = req.POST.get('query')
