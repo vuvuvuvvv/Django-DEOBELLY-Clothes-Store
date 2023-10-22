@@ -94,26 +94,21 @@ DE OBELLY - Điều khoản & Dịch vụ
             aria-controls="offcanvasCategory">
             Type <i class="fas fa-caret-down"></i>
         </button>
-        <!-- todo -->
-        {% if paramCate %}
-        <span class="fw-bold text-uppercase fs-6" id="offcanvas-category-name">{{ paramCate.type_name }}</span>
-        {% else %}
-        <span class="fw-bold text-uppercase fs-6" id="offcanvas-category-name" data-value="Product">Product</span>
-        {% endif %}
+        <span class="fw-bold text-uppercase fs-6" id="offcanvas-category-name" data-value="sản phẩm">sản phẩm</span>
         <div class="dropdown float-end offcanvas-dropdown">
             <button class="btn bg-transparent border-0 rounded-0 p-0 dropdown-toggle fs-6 fw-bold" type="button"
                 id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-sliders-h"></i> Filter
+                <i class="fas fa-sliders-h"></i> Lọc
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
-                    <button class="dropdown-item btn border-0 rounded-0 sortByDate">NEWEST</button>
+                    <button class="dropdown-item btn border-0 rounded-0 sortByDate">MỚI NHẤT</button>
                 </li>
                 <li>
-                    <button class="dropdown-item btn border-0 rounded-0 highToLow">PRICE (HIGH-LOW)</button>
+                    <button class="dropdown-item btn border-0 rounded-0 highToLow">GIÁ GIẢM DẦN</button>
                 </li>
                 <li>
-                    <button class="dropdown-item btn border-0 rounded-0 lowToHigh">PRICE (LOW-HIGH)</button>
+                    <button class="dropdown-item btn border-0 rounded-0 lowToHigh">GIÁ TĂNG DẦN</button>
                 </li>
             </ul>
         </div>
@@ -121,7 +116,7 @@ DE OBELLY - Điều khoản & Dịch vụ
 
     <div class="col-12 col-md-3 col-xl-2 m-0 p-0 d-md-block d-none">
         <div class="w-100 px-3 py-2 m-0 border-bottom border-dark">
-            <span class="fw-bold fs-5 p-0 text-uppercase">Type</span>
+            <span class="fw-bold fs-5 p-0 text-uppercase">LOẠI</span>
         </div>
         <div class="accordion accordion-flush w-100 pb-5" id="type_category">
             {% for type in product_types %}
@@ -163,13 +158,13 @@ DE OBELLY - Điều khoản & Dịch vụ
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li>
-                            <button class="dropdown-item btn border-0 rounded-0 sortByDate">NEWEST</button>
+                            <button class="dropdown-item btn border-0 rounded-0 sortByDate">MỚI NHẤT</button>
                         </li>
                         <li>
-                            <button class="dropdown-item btn border-0 rounded-0 highToLow">PRICE (HIGH-LOW)</button>
+                            <button class="dropdown-item btn border-0 rounded-0 highToLow">GIÁ GIẢM DẦN</button>
                         </li>
                         <li>
-                            <button class="dropdown-item btn border-0 rounded-0 lowToHigh">PRICE (LOW-HIGH)</button>
+                            <button class="dropdown-item btn border-0 rounded-0 lowToHigh">GIÁ TĂNG DẦN</button>
                         </li>
                     </ul>
                 </div>

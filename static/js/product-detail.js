@@ -44,35 +44,14 @@ $('#btnAddToCart').click(function () {
     if ($('#sth').attr('data-id') == 1) {
         window.location.href = "/login?ref=" + window.location.pathname + '?detail=' + $('.product-information').attr('data-id');
     } else {
-        if ($('#quantity').attr('data-quantity') != 0) {
-            if ($('#color').attr('data-color') == '' || $('#size').attr('data-size') == '') {
-                $('#classify').addClass('bg-lighter-danger');
-                $('#notify').html($('#notify').attr('data-validate'));
-                setTimeout(function () {
-                    $('#classify').removeClass('bg-lighter-danger');
-                    $('#notify').html('');
-                }, 3000);
-            } else {
-                requestData();
-            }
-        }
+        requestData();
     }
 });
 $('#btnBuyNow').click(function (e) {
     if ($('#sth').attr('data-id') == 1) {
         window.location.href = "/login?ref=" + window.location.pathname + '?detail=' + $('.product-information').attr('data-id');
     } else {
-        if ($('#color').attr('data-color') == '' || $('#size').attr('data-size') == '') {
-            e.preventDefault();
-            $('#classify').addClass('bg-lighter-danger');
-            $('#notify').html($('#notify').attr('data-validate'));
-            setTimeout(function () {
-                $('#classify').removeClass('bg-lighter-danger');
-                $('#notify').html('');
-            }, 3000);
-        } else {
-            requestData();
-        }
+        requestData();
     }
 });
 
@@ -89,26 +68,12 @@ function requestData() {
     });
     request.done(function (response) {
         let toast = new bootstrap.Toast(document.getElementById('liveToast'));
-        $('#toastNotify').html('<i class="fas fa-check-circle"></i> Thêm giỏ hàng thành công');
-        toast.show();
-        $('#toastBoard, #liveToast').addClass('bg-success text-light');
-        $('#amount_cart').html(response.amount_cart)
-        setTimeout(function () {
-            toast.hide(200);
-            $('#toastNotify').html('');
-            $('#toastBoard, #liveToast').removeClass('bg-success text-light');
-        }, 2000);
+        swal("Thành công!", "Đã thêm sản phẩm vào giỏ hàng.", "success");
     });
     request.fail(function (response) {
         let toast = new bootstrap.Toast(document.getElementById('liveToast'));
         $('#toastNotify').html('<i class="far fa-times-circle"></i> ' + response.status);
-        toast.show();
-        $('#toastBoard, #liveToast').addClass('bg-danger text-light');
-        setTimeout(function () {
-            toast.hide(200);
-            $('#toastNotify').html('');
-        }, 2000);
-        $('#toastBoard, #liveToast').removeClass('bg-danger text-light');
+        swal("Lỗi!", response.status, "error");
     });
 }
 

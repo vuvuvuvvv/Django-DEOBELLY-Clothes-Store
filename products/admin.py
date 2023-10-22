@@ -50,7 +50,7 @@ admin.site.register(ProductCategory, ProductCategoryAdmin)
 
 # Product
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['display_image', 'name', 'description', 'regular_price', 'selling_price', 'get_category_display', 'sold', 'status']
+    list_display = ['display_image', 'name', 'regular_price', 'selling_price', 'get_category_display', 'sold', 'status']
     form = ProductAdminForm
 
     def get_category_display(self, obj):

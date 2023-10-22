@@ -12,7 +12,10 @@ class CartView(View):
     
     def get(self, req):
         carts = Cart.get_carts(user_obj= req.user)
-        msg = req.session['create_order_success']
+        try:
+            msg = req.session['create_order_success']
+        except Exception:
+            msg = None
         if msg:
             del req.session['create_order_success']
         return render(req, self.template_name, {

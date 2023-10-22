@@ -154,7 +154,6 @@
     <div id="wrapper" class="position-relative">
         <div id="content">
             <div class="offcanvas offcanvas-end" id="offcanvas-search">
-                <!-- Todo: -->
                 <form method="post" action="{% url 'shop' %}" class="w-100">
                     {% csrf_token %}
                     <div class="offcanvas-header px-3 py-0 border-bottom">
@@ -229,7 +228,7 @@
                                         <div class="dropdown header_login ps-2">
                                             <a class="dropdown-toggle" type="button" id="dropdownUserLogin"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="far fa-user"></i> {{ user.username }}
+                                                <i class="far fa-user"></i> {{ user.first_name }} {{ user.last_name }}
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownUserLogin">
                                                 <a class="dropdown-item" href="{% url 'logout' %}">Đăng xuất</a>
@@ -257,7 +256,6 @@
                                     <li class="site-nav-top">
                                         <a href="{% url 'cart' %}" class="site-nav-top-link">
                                             <div class="shopping-cart d-inline pe-0">
-                                                <!-- todo -->
                                                     <i class="fas fa-shopping-cart"></i> <span style="font-size: 11px;" id="amount_cart">{{ cart_quantity }}</span>
                                             </div>
                                         </a>
@@ -299,7 +297,7 @@
                                             </div>
                                         </div>
                                         <div class="col-9 ps-2 text-light">
-                                            <h5 class="m-0 sidebar-user-name">{{ user.username }}</h5>
+                                            <h5 class="m-0 sidebar-user-name">{{ user.first_name }} {{ user.last_name }}</h5>
                                             <span><i class="fas fa-circle success-icon"></i></span>
                                             Online
                                         </div>
@@ -403,7 +401,6 @@
 
                             <div class="main-nav-right text-end d-none d-lg-flex col-1 col-lg-10">
                                 <ul class="site-nav mb-0 ps-0 w-100 d-flex align-items-center justify-content-end" id="main-menu">
-                                    <!-- todo -->
                                     <li class="nav-item p-2">
                                         <a href="{% url 'shop'%}" class="site-nav-link">
                                             <span>shop</span>
@@ -475,7 +472,6 @@
                             <div class="col-sm-12 col-md-6 col-lg-3 pb-3 px-auto">
                                 <ul class="footer-nav no-bullets px-2 py-0">
                                     <h3 class="mb-1">THÔNG TIN LIÊN HỆ</h3>
-                                    <!-- Todo -->
                                     <li><span class="ft-content"><i class="fas fa-home"></i>{{ COMPANY_ADDRESS }}</span>
                                     </li>
                                     <li><span class="ft-content"><i class="fas fa-phone-square"></i> <a
@@ -491,19 +487,12 @@
                                     <li>
                                         <form action="{% url 'ajax_create_contact' %}" method="POST" class="d-flex">
                                             <input type="hidden" name="nameNewsLetter" value="newsletter">
-                                            <!-- Todo -->
                                             <input type="email" class="form-control rounded-0 d-inline w-75 border-0"
                                                 id="exampleInputEmail1" name="emailNewsLetter"
                                                 aria-describedby="emailHelp" placeholder="Enter your email...">
-                                            {% if user.is_anonymous %}
-                                            <a href="{% url 'login' %}?ref={{ request.path }}"
-                                                class="btn btn-dark d-inline align-baseline rounded-0 d-flex align-items-center justify-content-center"><i
-                                                    class="fas fa-paper-plane"></i></a>
-                                            {% else %}
                                             <button type="submit"
                                                 class="btn btn-dark d-inline align-baseline rounded-0 d-flex align-items-center justify-content-center"><i
                                                     class="fas fa-paper-plane"></i></button>
-                                            {% endif %}
                                         </form>
                                     </li>
                                 </ul>
@@ -559,7 +548,7 @@
             $('#loader').show();
             setTimeout(() => {
                 $('#loader').hide();
-            }, 1500);
+            }, 1000);
         }
         document.addEventListener("DOMContentLoaded", function() {
             loader()

@@ -18,6 +18,8 @@ const parseUrlQuery = (value) => {
 let myUrl = location;
 if (parseUrlQuery(myUrl)['type'] !== undefined) {
     type = parseUrlQuery(myUrl)['type'][0];
+    typeName = $(`button[data-type=${type}]`).attr('data-type-name')
+    $('#offcanvas-category-name').html(typeName);
 }
 
 // Get search query 
@@ -161,7 +163,6 @@ function requestData() {
                 let number_of_items = arrRes.amount;
                 let product_per_page = 8
                 let number_of_pages = Math.ceil(number_of_items / product_per_page);
-                console.log(number_of_pages, number_of_items);
                 jQuery(document).ready(function () {
                     let navigation_html = '<a class="first_link" href="javascript:first();">&#10094;&#10094;</a><a class="previous_link" href="javascript:previous();">&#10094;</a>';
                     let current_link = 0;

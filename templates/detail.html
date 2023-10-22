@@ -109,7 +109,6 @@
         <div class="w-100 row m-0 p-0">
             <span class="fw-light col-12 col-sm-3 px-1 fs-5 d-block mb-2">Type:</span>
             <div class="col-12 col-sm-9 mx-0 px-0 fw-light text-uppercase fs-5">
-                <!-- todo -->
                 {{ product.category.name }}
             </div>
         </div>
@@ -160,7 +159,7 @@
                 id="btnAddToCart"><i class="fas fa-cart-plus"></i> Thêm vào giỏ hàng
             </button>
             <a class="btn p-2 btn-dark text-light col-12 col-sm-6 col-md-12 col-lg-5 text-light rounded-0"
-                href="{% static 'checkout' %}" id="btnBuyNow">Mua ngay</a>
+                href="{% url 'checkout' %}" id="btnBuyNow">Mua ngay</a>
 
         </div>
     </div>
@@ -238,13 +237,6 @@
     </div>
     {% endfor %}
 </div>
-<div id="toastBoard" class="position-fixed rounded">
-    <div id="liveToast" class="toast py-3 px-2 text-light border-2 fw-bold" role="alert"
-         aria-live="assertive" aria-atomic="true">
-        <span id="toastNotify"></span>
-    </div>
-</div>
-
 {% endblock%}
 
 
@@ -282,3 +274,113 @@
     });
 </script>
 {% endblock %}
+
+
+<h1>Sản phẩm: Áo khoác dạ cao cấp</h1>
+<p>Chất liệu dạ cao cấp, form dáng vừa vặn phù hợp với dáng người. Túi áo nắp hộp, có túi ngực, bên trong áo có túi sơ cua tiện lợi. Cánh tay áo đính thêm cúc tạo điểm nhấn, áo 2 lớp dày dặn ấm áp.</p>
+
+<p><strong>Màu sắc:</strong> Họa tiết Ghi Khói</p>
+
+<h2>Thông tin sản phẩm</h2>
+<ul>
+    <li><strong>Dòng sản phẩm:</strong> Men</li>
+    <li><strong>Nhóm sản phẩm:</strong> Áo khoác</li>
+    <li><strong>Cổ áo:</strong> Cổ hai ve</li>
+    <li><strong>Tay áo:</strong> Tay dài</li>
+    <li><strong>Kiểu dáng:</strong> Ôm</li>
+    <li><strong>Độ dài:</strong> Thường</li>
+    <li><strong>Họa tiết:</strong> Họa tiết khác</li>
+    <li><strong>Chất liệu:</strong> Dạ</li>
+</ul>
+
+<h2>Bảng tư vấn SIZE MEN (Cân nặng- Chiều cao)</h2>
+<table>
+    <tr>
+        <th>Size</th>
+        <th>Cân nặng (kg)</th>
+        <th>Chiều cao (cm)</th>
+    </tr>
+    <tr>
+        <td>S</td>
+        <td>55-65</td>
+        <td>162-168</td>
+    </tr>
+    <tr>
+        <td>M</td>
+        <td>65-68</td>
+        <td>168-172</td>
+    </tr>
+    <tr>
+        <td>L</td>
+        <td>67-73</td>
+        <td>172-176</td>
+    </tr>
+    <tr>
+        <td>XL</td>
+        <td>74-78</td>
+        <td>176-180</td>
+    </tr>
+    <tr>
+        <td>XXL</td>
+        <td>78-85</td>
+        <td>180-185</td>
+    </tr>
+</table>
+
+<h2>Bảng tư vấn SIZE</h2>
+<table>
+    <tr>
+        <th>Size</th>
+        <th>Vai (cm)</th>
+        <th>Ngực (cm)</th>
+        <th>Eo (cm)</th>
+        <th>Mông (cm)</th>
+    </tr>
+    <tr>
+        <td>S</td>
+        <td>44</td>
+        <td>90</td>
+        <td>88</td>
+        <td>91</td>
+    </tr>
+    <tr>
+        <td>M</td>
+        <td>45</td>
+        <td>94</td>
+        <td>92</td>
+        <td>95</td>
+    </tr>
+    <tr>
+        <td>L</td>
+        <td>46</td>
+        <td>98</td>
+        <td>96</td>
+        <td>99</td>
+    </tr>
+    <tr>
+        <td>XL</td>
+        <td>47</td>
+        <td>102</td>
+        <td>100</td>
+        <td>104</td>
+    </tr>
+    <tr>
+        <td>XXL</td>
+        <td>48</td>
+        <td>106</td>
+        <td>104</td>
+        <td>109</td>
+    </tr>
+</table>
+
+<p><strong>Thông tin thương hiệu:</strong> Thành lập từ tháng 10/2005, hiện tại DEOBELLY đã trở thành thương hiệu thời trang số 1 trên thị trường thời trang Việt Nam. Tính đến thời điểm năm 2019, DEOBELLY đang có sự đóng góp từ hơn 3000 nhân sự tại các khối: Văn phòng, Nhà máy và hệ thống 77 Cửa hàng trên toàn quốc, 7 cửa hàng Đại lý.</p>
+
+<p><strong>Lưu ý QUAN TRỌNG:</strong> Bảng size chart chỉ mang tính chất tham khảo, tùy thuộc vào số đo cơ thể mỗi người và chất liệu vải khác nhau sẽ có sự chênh lệch nhất định từ 1 - 2cm.</p>
+
+<p><strong>CAM KẾT:</strong> 100% hàng chính hãng từ DEOBELLY</p>
+
+<p><strong>Đội ngũ CSKH của DEOBELLY luôn tư vấn tận tâm, hỗ trợ nhiệt tình nhất với khách hàng.</strong></p>
+
+<p><strong>DEOBELLY cảm ơn quý khách hàng đã tin yêu sản phẩm và mua hàng tại shop !</strong></p>
+
+<p><strong>DEOBELLY TUYÊN NGÔN THỜI TRANG CỦA TÔI</strong></p>

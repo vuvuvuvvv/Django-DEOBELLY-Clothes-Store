@@ -15,7 +15,7 @@
 {% block content %}
 {% if msg %}
 <script>
-    swal("Thành công!", "Đơn hàng của bạn đã được khởi tạo!", "Ok");
+    swal("Thành công!", "Đơn hàng của bạn đã được khởi tạo!", "success");
 </script>
 {% endif %}
 
@@ -41,7 +41,7 @@
 {% for item in carts %}
 <!-- product: item.product, quantity: item.quantity -->
     <div class="col-12 row mx-0 py-2 my-3 my-md-2 border-bottom border-top p-0 row-product cart-item" data-id="{{ item.product.id|encrypt_string }}">
-        <a href="{% url 'detail' %}/?slug={{ item.product.slug }}" class="text-decoration-none col-4 col-sm-3 col-md-2 col-xl-1">
+        <a href="{% url 'detail' %}?slug={{ item.product.slug }}" class="text-decoration-none col-4 col-sm-3 col-md-2 col-xl-1">
             <div class="w-100 m-0 px-0 d-flex justify-content-center align-items-center" style="aspect-ratio: 2 / 3;background-color: rgb(0 0 0 / 10%);">
                 <img src="{% static 'images' %}/{{ item.product.image }}" loading='lazy' class="object-fit-cover w-100 px-0">
             </div>
@@ -100,8 +100,6 @@
                         Tổng
                         :
                     </p>
-                    <!-- todo -->
-                    <!-- <span id="total_price_product_{{ item.product.id|encrypt_string }}" class="total-price_<?= $key ?>" -->
                     <span id="total_product_price_{{ item.product.id|encrypt_string }}" class="total-price"
                         data-total-price="{{ item.total_price }}">
                         {{ item.total_price|format_number }} VND

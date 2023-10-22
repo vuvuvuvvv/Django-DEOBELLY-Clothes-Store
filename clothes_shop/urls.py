@@ -114,7 +114,6 @@ urlpatterns = [
     path('checkout/',order_views.CheckoutView.as_view(), name='checkout'),
     
     # todo
-    path('',core_views.index, name='search_product'),
     path('',core_views.index, name='ajax_create_contact'),
 ]
 
