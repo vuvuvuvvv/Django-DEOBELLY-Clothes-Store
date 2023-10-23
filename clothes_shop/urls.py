@@ -112,6 +112,7 @@ urlpatterns = [
     path('shop/detail/', pr_views.ProductDetail.as_view(), name='detail'),
     path('cart/',cart_views.CartView.as_view(), name='cart'),
     path('checkout/',order_views.CheckoutView.as_view(), name='checkout'),
+    path('order/',order_views.order, name='order'),
     
     # todo
     path('',core_views.index, name='ajax_create_contact'),

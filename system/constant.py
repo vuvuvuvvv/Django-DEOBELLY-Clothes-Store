@@ -20,4 +20,10 @@ ORDER_FAILED = 0
 ORDER_SUCCESSFUL = 1
 ORDER_PROCESSING = 2
 ORDER_DELIVERING = 3
+TRACKING_STATUS = {
+    '0':'Thất bại',
+    '1':'Thành công',
+    '2':'Đang xử lý',
+    '3':'Đang vận chuyển'
+}
 PRODUCT_PER_PAGE = 8

@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from cart.models import Cart
+from order.models import Order
 from products.models import Product
 from order.forms import OrderForm
 from core.models import GeoLocation
@@ -48,3 +49,11 @@ class CheckoutView(View):
             return redirect('cart')
         else:
             return render(req, self.template_name, {'form': form})
+        
+def order(req):
+    orders = Order.objects.filter(user=req.user)
+    print(orders)
+    return render(req, 'order.html', {
+            'orders': orders
+        }
+    )

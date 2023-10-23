@@ -1,0 +1,86 @@
+{% extends 'layouts/layout.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}Danh sách đơn hàng
+{% endblock %}
+
+{% block header %}
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 25px;
+    }
+    
+    td, th {
+      border: 1px solid #000;
+      text-align: left;
+      padding: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block staticlink %}
+{% endblock %}
+
+{% block content %}
+
+
+<div class="w-100 mx-0 text-center my-4 my-md-5 py-md-5 {% if orders %}d-none{% endif %}" id="notify_cart_null">
+    <img src="{% static 'images/noorder.png' %}" class="w-25 my-2"><br>
+    <a href="{% url 'shop' %}" class="text-decoration-none"><small class="text-dark">Tiếp tục mua sắm <i
+                class="fas fa-arrow-right"></i></small></a>
+</div>
+
+{% if orders %}
+<div class="w-100 row m-0 p-0 pt-4" id="cart_table">
+    <h3 class="text-uppercase mb-3">danh sách đơn hàng</h3>
+    <div class="w-100 row mx-0 px-0" id="cart">
+    {% for item in orders %}
+    <!-- product: item.product, quantity: item.quantity -->
+        <div class="col-12 m-0 p-0">
+            <table>
+                <tr>
+                  <th colspan="3" style='background-color: #000;color: #fff'>Mã vận đơn: {{ item.BL_code}}</th>
+                </tr>
+                <tr>
+                  <td style="width: 30%"><b>Tên người nhận</b></td>
+                  <td>{{ item.consignee_name }}</td>
+                </tr>
+                <tr>
+                  <td style="width: 30%"><b>Số điện thoại</b></td>
+                  <td>{{ item.tel }}</td>
+                </tr>
+                <tr>
+                  <td style="width: 30%"><b>Địa chỉ nhận</b></td>
+                  <td>{{ item.address }}</td>
+                </tr>
+                <tr>
+                  <td colspan="3">
+                        <b>Nội dung hàng:</b>
+                        <ul style="list-style-type: decimal;margin: 6px 0;padding-left:25px;">
+                            {% for o_i in item.products_id_and_quantity|get_order_information %}
+                            <li style="padding: 5px;">{{o_i.name}}, SL: {{o_i.quantity}}</li>
+                            {% endfor %}
+                        </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3"><b>Tổng thanh toán:</b> {{ item.total_price|format_number }} VND</td>
+                </tr>
+                <tr>
+                  <td colspan="3" style='background-color: #f1f1f1;'><b>Trạng thái:</b> {{ item.status|tracking_status }}</td>
+                </tr>
+              </table>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% endblock%}
+
+{% block scripts %}
+{% endblock %}

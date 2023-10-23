@@ -1,5 +1,8 @@
 {% extends 'layouts/blank.html' %}
 {% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
+
 {% block title %}
 Đăng ký
 {% endblock %}
@@ -8,7 +11,7 @@
 <link href="{% static 'css/login.css' %}" rel="stylesheet">
 {% endblock %}
 
-{% block css %}
+{% block header %}
 <style>
     #wrapper {
         background-image: url('{% static "images/site-index/pronto-image-5-min.jpg" %}');
@@ -17,6 +20,7 @@
         background-repeat: no-repeat;
         background-size: cover;
     }
+
     ul {
         margin: 0;
     }
@@ -25,9 +29,23 @@
 
 
 {% block content %}
-<div class="row m-0 pt-sm-4 pt-md-5 w-100 d-flex align-items-center justify-content-center">
+<div class="row m-0 pt-sm-4 w-100 d-flex align-items-center justify-content-center">
     <div class="col-12 col-xl-6 py-sm-0 py-4 d-flex align-items-center bg-input-field">
         <div class="mx-md-4 my-md-3 py-md-4 p-3 w-100">
+            <div class="my-3">
+                <h4 class="text-center text-uppercase m-0 text-secondary line-title">Đăng ký với</h4>
+            </div>
+            <div class="row mx-0 my-3 p-0">
+                <div class="col-12 m-0 p-1">
+                    <a class="w-100 btn btn-primary rounded-pill py-2 text-center" href="javascript:void(0)"><i class="fab fa-facebook-f"></i>
+                         <span class="mx-3">|</span> Facebook</a>
+                </div>
+                <div class="col-12 m-0 p-1">
+                    <a class="w-100 btn btn-danger rounded-pill py-2 text-center"
+                        href="{% provider_login_url 'google' %}"><i class="fab fa-google"></i> <span
+                            class="mx-3">|</span> Google</a>
+                </div>
+            </div>
             <div class="my-2">
                 <h4 class="text-center text-uppercase m-0 text-secondary line-title">Đăng ký</h4>
             </div>

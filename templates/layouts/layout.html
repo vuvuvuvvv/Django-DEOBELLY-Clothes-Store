@@ -16,13 +16,10 @@
     <!-- Setup bootstrap 5 -->
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'fontawesome-free-5.15.2-web/css/all.css' %}">
     <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
-<!-- 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js" integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-
     <link rel="stylesheet" href="{% static 'css/bootstrap-5.3.1.min.css' %}">
     <script src="{% static 'js/bootstrap-5.3.1.min.js' %}"></script>
     <script src="{% static 'fontawesome-free-5.15.2-web/js/all.js' %}"></script>
@@ -231,9 +228,8 @@
                                                 <i class="far fa-user"></i> {{ user.first_name }} {{ user.last_name }}
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownUserLogin">
+                                                <a class="dropdown-item" href="{% url 'order' %}">Đơn hàng</a>
                                                 <a class="dropdown-item" href="{% url 'password_change' %}">Đổi mật khẩu</a>
-                                            </div>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownUserLogin">
                                                 <a class="dropdown-item" href="{% url 'logout' %}">Đăng xuất</a>
                                             </div>
                                         </div>
@@ -361,6 +357,16 @@
                                                     </a>
                                                 </li>
                                                 {% if user.is_authenticated %}
+                                                <li class="nav-item border-bottom border-light">
+                                                    <a href="{% url 'order' %}" class="nav-link text-uppercase p-3">
+                                                        <p class="m-0 fs__15px">Đơn hàng</p>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item border-bottom border-light">
+                                                    <a href="{% url 'password_change' %}" class="nav-link text-uppercase p-3">
+                                                        <p class="m-0 fs__15px">Đổi mật khẩu</p>
+                                                    </a>
+                                                </li>
                                                 <li class="nav-item border-bottom border-light">
                                                     <a href="{% url 'logout' %}" class="nav-link text-uppercase p-3">
                                                         <p class="m-0 fs__15px">Đăng xuất</p>
@@ -545,6 +551,45 @@
             </footer>
         </div>
     </div>
+    <div class="phone-call">
+        <a href="tel:{{ PHONE_CONTACT }}">
+            <div class="d-flex align-items-center justify-content-center text-white" style="width: 50px; height: 50px;">
+                <i class="fas fa-phone-alt"></i>
+            </div>
+        </a>
+    </div>
+
+    <!-- Messenger Chat Plugin Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Chat Plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "133631683175129");
+        chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+            xfbml            : true,
+            version          : 'v18.0'
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!-- End code -->
     <script>
         function loader() {
             $('html').scrollTop(0);

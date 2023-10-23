@@ -6,17 +6,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <meta name="description" content="Mua sắm những bộ trang phục sang trọng và thời trang tại cửa hàng chúng tôi. Đắm chìm trong thế giới của các thiết kế độc đáo, vải chất lượng cao và phong cách đẳng cấp. Hãy khám phá bộ sưu tập của chúng tôi ngay hôm nay và biến ước mơ về một trang phục hoàn hảo thành hiện thực."/>
+    <meta property="og:image" content="{% static 'images/logo.png' %}">
+    <meta property="og:site_name" content="YouTube">
+    <meta property="og:title" content="DE-OBELLY Shop quần áo sang trọng">
     <!-- Setup bootstrap 5 -->
-
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/font-awesome/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fontawesome-free-5.15.2-web/css/all.css' %}">
     <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap-5.3.1.min.css' %}">
     <script src="{% static 'js/bootstrap-5.3.1.min.js' %}"></script>
-    <script src="{% static 'js/font-awesome/all.min.js' %}"></script>
-    <script src="{% static 'js/popper.min.js' %}"></script>
-    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'fontawesome-free-5.15.2-web/js/all.js' %}"></script>
     <script src="{% static 'js/sweetalert.min.js' %}"></script>
     <style>
         body,
@@ -50,7 +54,7 @@
         var csrftoken = getCookie('csrftoken')
     </script>
     <!-- Internal css -->
-    {% block css %}
+    {% block header %}
     {% endblock %}
     <!-- Custom link: css, js,... -->
     {% block staticlink %}
