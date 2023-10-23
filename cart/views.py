@@ -29,29 +29,38 @@ class CartView(View):
             post = req.POST
             product_id = str(decode(post.get('product_id')))
             quantity = post.get('amount')
-            pr_q = Cart.get_pr_q(req.user)
-            data = ''
-            exists = False
-            if len(pr_q) > 0:
-                pr_q = pr_q.split(';')
-                for dt in pr_q:
-                    if product_id in dt.split(':')[0]:
-                        data+=f'{product_id}:{int(quantity)+int(dt.split(":")[1])}'
-                        exists = True
-                    else:
-                        data+=dt
-                    if not dt == pr_q[len(pr_q)-1]:
-                        data+=';'
-                if not exists:
-                    data+=f';{product_id}:{quantity}'
+            buynow = int(post.get('buynow'))
+            if buynow == 1:
+                pr_q = f'{product_id}:{quantity}'
+                pr_q_exists = Cart.get_buynow_cart(req.user)
+                buynow_cart = get_object_or_404(Cart, user=req.user, status = STATUS_INACTIVE)
+                buynow_cart.products_id_and_quantity = pr_q
+                buynow_cart.save()
             else:
-                data+=f'{product_id}:{quantity}'
-            cart = get_object_or_404(Cart, user = req.user)
-            cart.products_id_and_quantity = data
-            cart.save()
+                pr_q = Cart.get_pr_q(req.user)
+                data = ''
+                exists = False
+                if len(pr_q) > 0:
+                    pr_q = pr_q.split(';')
+                    for dt in pr_q:
+                        if product_id in dt.split(':')[0]:
+                            data+=f'{product_id}:{int(quantity)+int(dt.split(":")[1])}'
+                            exists = True
+                        else:
+                            data+=dt
+                        if not dt == pr_q[len(pr_q)-1]:
+                            data+=';'
+                    if not exists:
+                        data+=f';{product_id}:{quantity}'
+                else:
+                    data+=f'{product_id}:{quantity}'
+                cart = get_object_or_404(Cart, user = req.user, status = STATUS_ACTIVE)
+                cart.products_id_and_quantity = data
+                cart.save()
+            get_pr_q = Cart.get_pr_q(req.user)
             result = {
                 'status': STATUS_ACTIVE,
-                'amount_cart': len(data.split(';'))
+                'amount_cart': len(get_pr_q.split(';')) if len(get_pr_q)>0 else len(get_pr_q)
             }
             return JsonResponse(result)
     
@@ -68,7 +77,7 @@ class CartView(View):
                     data+=dt
                 if not dt == pr_q[len(pr_q)-1]:
                     data+=';'
-            cart = get_object_or_404(Cart, user = req.user)
+            cart = get_object_or_404(Cart, user = req.user, status = STATUS_ACTIVE)
             cart.products_id_and_quantity = data
             cart.save()
             result = {
@@ -88,12 +97,12 @@ class CartView(View):
                     data+=dt
                 if not dt == pr_q[len(pr_q)-1]:
                     data+=';'
-            cart = get_object_or_404(Cart, user = req.user)
+            cart = get_object_or_404(Cart, user = req.user, status = STATUS_ACTIVE)
             cart.products_id_and_quantity = data
             cart.save()
             result = {
                 'status': STATUS_ACTIVE,
-                'amount_cart': len(data.split(';')),
+                'amount_cart': len(data.split(';')) if len(data)>0 else len(data)
             }
             return JsonResponse(result)
 

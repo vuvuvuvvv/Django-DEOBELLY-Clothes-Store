@@ -36,7 +36,6 @@ def validate_infor_user(req):
             user.set_password(form.cleaned_data['password1'])
             user.save()
             auth_login(req, user,backend='django.contrib.auth.backends.ModelBackend')
-            print(User.objects.get(pk=req.user.id))
         else:
             return render(req,'complete_information.html',{'form':form})
         return redirect('home')

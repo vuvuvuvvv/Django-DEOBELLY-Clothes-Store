@@ -126,6 +126,10 @@ function deleteCart(e) {
                 }
             });
             $('#amount_cart').html(response.amount_cart)
+            if (response.amount_cart == 0) {
+                $('#notify_cart_null').removeClass('d-none');
+                $('#cart_table').addClass('d-none')
+            }
             totalPayment();
         },
         error: (jqXHR, textStatus) => {

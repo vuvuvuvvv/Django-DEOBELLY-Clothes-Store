@@ -231,6 +231,9 @@
                                                 <i class="far fa-user"></i> {{ user.first_name }} {{ user.last_name }}
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownUserLogin">
+                                                <a class="dropdown-item" href="{% url 'password_change' %}">Đổi mật khẩu</a>
+                                            </div>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownUserLogin">
                                                 <a class="dropdown-item" href="{% url 'logout' %}">Đăng xuất</a>
                                             </div>
                                         </div>

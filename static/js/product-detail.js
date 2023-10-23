@@ -50,12 +50,13 @@ $('#btnAddToCart').click(function () {
 $('#btnBuyNow').click(function (e) {
     if ($('#sth').attr('data-id') == 1) {
         window.location.href = "/login?ref=" + window.location.pathname + '?detail=' + $('.product-information').attr('data-id');
-    } else {
-        requestData();
+    } 
+    else {
+        requestData(1);
     }
 });
 
-function requestData() {
+function requestData(buynow = 0) {
     id = $('.product-information').attr('data-id');
     amount = $('#amountInput').val();
     let request = $.ajax({
@@ -64,11 +65,16 @@ function requestData() {
         data: {
             product_id: id,
             amount: amount,
+            buynow: buynow
         },
     });
     request.done(function (response) {
-        let toast = new bootstrap.Toast(document.getElementById('liveToast'));
-        swal("Thành công!", "Đã thêm sản phẩm vào giỏ hàng.", "success");
+        $('#amount_cart').html(response.amount_cart)
+        if (buynow == 0) {
+            let toast = new bootstrap.Toast(document.getElementById('liveToast'));
+            swal("Thành công!", "Đã thêm sản phẩm vào giỏ hàng.", "success");
+        }
+        
     });
     request.fail(function (response) {
         let toast = new bootstrap.Toast(document.getElementById('liveToast'));
