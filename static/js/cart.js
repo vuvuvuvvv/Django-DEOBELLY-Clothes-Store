@@ -113,27 +113,37 @@ function updateAmount(product_id, amount) {
 }
 
 function deleteCart(e) {
-    $.ajax({
-        url: "/cart/delete-cart/",
-        method: "POST",
-        data: {
-            product_id: $(e).attr('data-id'),
-        },
-        success: (response)=>{
-            $('.cart-item').each((index, val) => {
-                if($(val).attr('data-id') == $(e).attr('data-id')) {
-                    $(val).remove();
-                }
-            });
-            $('#amount_cart').html(response.amount_cart)
-            if (response.amount_cart == 0) {
-                $('#notify_cart_null').removeClass('d-none');
-                $('#cart_table').addClass('d-none')
+    swal({
+        title: "Bạn muốn xóa?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "/cart/delete-cart/",
+                    method: "POST",
+                    data: {
+                        product_id: $(e).attr('data-id'),
+                    },
+                    success: (response)=>{
+                        $('.cart-item').each((index, val) => {
+                            if($(val).attr('data-id') == $(e).attr('data-id')) {
+                                $(val).remove();
+                            }
+                        });
+                        $('#amount_cart').html(response.amount_cart)
+                        if (response.amount_cart == 0) {
+                            $('#notify_cart_null').removeClass('d-none');
+                            $('#cart_table').addClass('d-none')
+                        }
+                        totalPayment();
+                    },
+                    error: (jqXHR, textStatus) => {
+                        alert("Request failed: " + textStatus); // check errors
+                    }
+                });
             }
-            totalPayment();
-        },
-        error: (jqXHR, textStatus) => {
-            alert("Request failed: " + textStatus); // check errors
-        }
-    });
+        });
 }

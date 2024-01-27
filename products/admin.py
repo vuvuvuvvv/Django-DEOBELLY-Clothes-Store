@@ -79,7 +79,6 @@ class ProductAdmin(admin.ModelAdmin):
                         for chunk in uploaded_image.chunks():
                             destination.write(chunk)
 
-
                     image = Image.open(image_path)
                     # Resizing to 800x600 pixels
                     image.thumbnail((800, 600))
